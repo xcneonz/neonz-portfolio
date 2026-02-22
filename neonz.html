@@ -1501,6 +1501,100 @@
         pointer-events: none;
         white-space: nowrap;
     }
+    /* ════════════════════════════════════════
+       FLOATING CHAT WIDGET
+    ════════════════════════════════════════ */
+    #chat-widget {
+        position: fixed;
+        bottom: 28px; right: 28px;
+        z-index: 5000;
+        display: flex; flex-direction: column; align-items: flex-end; gap: 14px;
+    }
+    /* Panel */
+    #chat-panel {
+        width: 340px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex; flex-direction: column;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+        backdrop-filter: blur(30px);
+        transform-origin: bottom right;
+        transition: transform 0.45s var(--ease-out-expo), opacity 0.35s ease;
+    }
+    .chat-panel-hidden {
+        transform: scale(0.85) translateY(20px) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    /* Toggle button */
+    #chat-toggle {
+        width: 56px; height: 56px;
+        background: var(--accent);
+        border: none;
+        border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        color: #000;
+        box-shadow: 0 0 30px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.4);
+        transition: all 0.3s var(--ease-out-expo);
+        position: relative;
+        flex-shrink: 0;
+    }
+    #chat-toggle:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--accent-glow), 0 8px 30px rgba(0,0,0,0.5); }
+    body.neonz #chat-toggle { background: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.2), 0 8px 24px rgba(0,0,0,0.5); }
+    body.neonz #chat-toggle:hover { box-shadow: 0 0 50px rgba(255,255,255,0.35), 0 8px 30px rgba(0,0,0,0.6); }
+    .chat-pulse-ring {
+        position: absolute; inset: -4px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        animation: chat-pulse 2.5s ease-out infinite;
+        opacity: 0;
+    }
+    body.neonz .chat-pulse-ring { border-color: #fff; }
+    @keyframes chat-pulse {
+        0%   { transform: scale(0.95); opacity: 0.5; }
+        100% { transform: scale(1.4);  opacity: 0; }
+    }
+
+    /* ════════════════════════════════════════
+       NEONZ BG — ENHANCED CANVAS + VHS OVERLAY
+    ════════════════════════════════════════ */
+    #nz-canvas {
+        position: fixed; inset: 0;
+        width: 100vw; height: 100vh;
+        z-index: 0; pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+    body.neonz #nz-canvas { opacity: 1; }
+    body.neonz #aurora-canvas { opacity: 0; }
+
+    /* VHS scanlines overlay (neonz only) */
+    .vhs-overlay {
+        position: fixed; inset: 0; z-index: 2; pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0,0,0,0) 0px,
+            rgba(0,0,0,0) 2px,
+            rgba(0,0,0,0.08) 2px,
+            rgba(0,0,0,0.08) 4px
+        );
+    }
+    body.neonz .vhs-overlay { opacity: 1; }
+
+    /* Chromatic aberration border glow (neonz only) */
+    .nz-edge-glow {
+        position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+        transition: opacity 0.8s ease;
+        background:
+            radial-gradient(ellipse at 0% 50%, rgba(255, 0, 80, 0.06) 0%, transparent 50%),
+            radial-gradient(ellipse at 100% 50%, rgba(0, 200, 255, 0.06) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 100%, rgba(160, 0, 255, 0.07) 0%, transparent 50%);
+    }
+    body.neonz .nz-edge-glow { opacity: 1; }
     </style>
 </head>
 <body>
@@ -1522,8 +1616,11 @@
 
 <!-- ═══════════════════════ BACKGROUNDS ═══════════════════════ -->
 <canvas id="aurora-canvas"></canvas>
+<canvas id="nz-canvas"></canvas>
 <div class="noise-overlay"></div>
 <div class="grid-overlay"></div>
+<div class="vhs-overlay"></div>
+<div class="nz-edge-glow"></div>
 
 <!-- ═══════════════════════ MODE SWITCH OVERLAY ═══════════════════════ -->
 <div id="switch-overlay">
@@ -1534,7 +1631,7 @@
 
 <!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
 <nav id="main-nav">
-    <a class="nav-logo interactable">AAM<span>_</span>CORE</a>
+    <a class="nav-logo interactable" id="nav-brand">ABDULRAHMAN</a>
 
     <div class="nav-links">
         <a href="#skills" class="nav-link interactable">Skills</a>
@@ -1786,45 +1883,6 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                     </a>
                 </div>
-
-                <!-- AAM-Core Chatbot Card -->
-                <div class="project-card interactable reveal reveal-delay-2" style="border-color: rgba(0,229,255,0.3);">
-                    <div class="project-num" style="opacity:0.04">AI</div>
-                    <div class="project-tags">
-                        <span class="project-tag">AI Assistant</span>
-                        <span class="project-tag">Live</span>
-                    </div>
-                    <div class="project-title" style="margin-bottom:16px;">Ask AAM-Core</div>
-
-                    <div class="chat-card" style="flex:1; min-height:0;">
-                        <div class="chat-topbar">
-                            <div class="chat-avatar">AI</div>
-                            <div style="flex:1">
-                                <div class="chat-name">AAM Assistant</div>
-                                <div class="chat-subtitle">
-                                    <span class="chat-status"><span class="status-dot"></span> Online</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="chat-messages" id="chat-messages">
-                            <div class="chat-msg msg-ai">Hey! I'm Abdulrahman's personal AI. Ask me anything about his skills, education, projects, or experience.</div>
-                        </div>
-
-                        <div class="suggested-qs" id="suggested-qs">
-                            <button class="sq interactable" onclick="askSuggested(this)">What are his skills?</button>
-                            <button class="sq interactable" onclick="askSuggested(this)">Tell me about his education</button>
-                            <button class="sq interactable" onclick="askSuggested(this)">Work experience?</button>
-                        </div>
-
-                        <div class="chat-footer">
-                            <input type="text" id="chat-inp" class="chat-input interactable" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendMsg()">
-                            <button class="chat-send interactable" onclick="sendMsg()">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1843,23 +1901,27 @@
                 <div class="nz-ticker">
                     <span>xc.neonz</span>
                     <span class="nz-ticker-sep">◆</span>
-                    <span>Gaming Content</span>
+                    <span>Gaming</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Influencing</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Entertainment</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Dev Series</span>
                     <span class="nz-ticker-sep">◆</span>
                     <span>Digital Creator</span>
-                    <span class="nz-ticker-sep">◆</span>
-                    <span>6+ Years Online</span>
-                    <span class="nz-ticker-sep">◆</span>
-                    <span>Business: xcn4ad@gmail.com</span>
                     <span class="nz-ticker-sep">◆</span>
                     <span>xc.neonz</span>
                     <span class="nz-ticker-sep">◆</span>
-                    <span>Gaming Content</span>
+                    <span>Gaming</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Influencing</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Entertainment</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Dev Series</span>
                     <span class="nz-ticker-sep">◆</span>
                     <span>Digital Creator</span>
-                    <span class="nz-ticker-sep">◆</span>
-                    <span>6+ Years Online</span>
-                    <span class="nz-ticker-sep">◆</span>
-                    <span>Business: xcn4ad@gmail.com</span>
                     <span class="nz-ticker-sep">◆</span>
                 </div>
             </div>
@@ -1903,8 +1965,8 @@
                     Directing, producing, and building loyal audiences across platforms. Six years of engineering content that gets watched, shared, and remembered.
                 </p>
                 <div class="nz-cta-row">
-                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-yt-btn interactable">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-yt-btn interactable" style="padding:20px 44px;font-size:1rem;gap:14px;border-radius:14px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
                         Watch Now
                     </a>
                     <a href="mailto:xcn4ad@gmail.com" class="nz-email-btn interactable">
@@ -1987,6 +2049,48 @@
 
 </div><!-- /page -->
 
+<!-- ═══════════════════════ FLOATING CHAT WIDGET ═══════════════════════ -->
+<div id="chat-widget">
+    <!-- Toggle button -->
+    <button id="chat-toggle" onclick="toggleChat()" class="interactable" title="Ask AAM-Core">
+        <div id="chat-toggle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div id="chat-toggle-close" style="display:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <div class="chat-pulse-ring"></div>
+    </button>
+
+    <!-- Chat panel -->
+    <div id="chat-panel" class="chat-panel-hidden">
+        <div class="chat-topbar">
+            <div class="chat-avatar">AI</div>
+            <div style="flex:1">
+                <div class="chat-name" id="chat-widget-name">AAM Assistant</div>
+                <div class="chat-subtitle"><span class="chat-status"><span class="status-dot"></span> Online</span></div>
+            </div>
+            <button onclick="toggleChat()" style="background:none;border:none;color:var(--text-muted);padding:4px;" class="interactable">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages" style="min-height:260px; max-height:300px;">
+            <div class="chat-msg msg-ai">Hey! Ask me anything about Abdulrahman — skills, education, projects, experience.</div>
+        </div>
+        <div class="suggested-qs" id="suggested-qs">
+            <button class="sq interactable" onclick="askSuggested(this)">Skills?</button>
+            <button class="sq interactable" onclick="askSuggested(this)">Education?</button>
+            <button class="sq interactable" onclick="askSuggested(this)">Experience?</button>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-inp" class="chat-input interactable" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendMsg()">
+            <button class="chat-send interactable" onclick="sendMsg()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
 <footer>
     <div class="footer-brand">AAM<span>_</span>CORE</div>
     <div class="footer-links">
@@ -2052,6 +2156,27 @@ document.querySelectorAll('.interactable, input, button, a').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
+
+/* ══════════════════════════════════════════
+   FLOATING CHAT WIDGET
+══════════════════════════════════════════ */
+let chatOpen = false;
+function toggleChat() {
+    chatOpen = !chatOpen;
+    const panel = document.getElementById('chat-panel');
+    const iconOpen  = document.getElementById('chat-toggle-icon');
+    const iconClose = document.getElementById('chat-toggle-close');
+    if (chatOpen) {
+        panel.classList.remove('chat-panel-hidden');
+        iconOpen.style.display = 'none';
+        iconClose.style.display = 'block';
+        document.getElementById('chat-inp').focus();
+    } else {
+        panel.classList.add('chat-panel-hidden');
+        iconOpen.style.display = 'block';
+        iconClose.style.display = 'none';
+    }
+}
 
 /* ══════════════════════════════════════════
    AURORA CANVAS
@@ -2123,6 +2248,103 @@ function drawAurora() {
     requestAnimationFrame(drawAurora);
 }
 drawAurora();
+
+/* ══════════════════════════════════════════
+   NEONZ CANVAS — CINEMATIC PARTICLE FIELD
+══════════════════════════════════════════ */
+const nzCanvas = document.getElementById('nz-canvas');
+const nzCtx = nzCanvas.getContext('2d');
+let nzW, nzH, nzParticles, nzStars;
+
+function initNzCanvas() {
+    nzW = nzCanvas.width  = window.innerWidth;
+    nzH = nzCanvas.height = window.innerHeight;
+
+    // Drifting streaks
+    nzParticles = Array.from({ length: 80 }, () => ({
+        x: Math.random() * nzW,
+        y: Math.random() * nzH,
+        len: Math.random() * 60 + 20,
+        speed: Math.random() * 0.8 + 0.2,
+        opacity: Math.random() * 0.4 + 0.05,
+        width: Math.random() * 0.8 + 0.2,
+    }));
+
+    // Static star field
+    nzStars = Array.from({ length: 220 }, () => ({
+        x: Math.random() * nzW,
+        y: Math.random() * nzH,
+        r: Math.random() * 0.9 + 0.1,
+        flicker: Math.random() * Math.PI * 2,
+        flickerSpeed: Math.random() * 0.02 + 0.005,
+    }));
+}
+window.addEventListener('resize', initNzCanvas);
+initNzCanvas();
+
+function drawNzCanvas() {
+    nzCtx.clearRect(0, 0, nzW, nzH);
+
+    // Background radial vignette
+    const vignette = nzCtx.createRadialGradient(nzW/2, nzH/2, nzH*0.1, nzW/2, nzH/2, nzH*0.85);
+    vignette.addColorStop(0, 'rgba(0,0,0,0)');
+    vignette.addColorStop(1, 'rgba(0,0,0,0.85)');
+    nzCtx.fillStyle = vignette;
+    nzCtx.fillRect(0, 0, nzW, nzH);
+
+    // Soft coloured fog pools
+    const fogColors = [
+        { x: nzW * 0.15, y: nzH * 0.25, r: nzW * 0.4,  h: 'rgba(120,0,255,0.025)' },
+        { x: nzW * 0.8,  y: nzH * 0.7,  r: nzW * 0.35, h: 'rgba(255,0,100,0.02)' },
+        { x: nzW * 0.5,  y: nzH * 0.1,  r: nzW * 0.3,  h: 'rgba(0,200,255,0.018)' },
+    ];
+    fogColors.forEach(f => {
+        const g = nzCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
+        g.addColorStop(0, f.h);
+        g.addColorStop(1, 'transparent');
+        nzCtx.fillStyle = g;
+        nzCtx.beginPath();
+        nzCtx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+        nzCtx.fill();
+    });
+
+    // Mouse glow in neonz
+    const mg2 = nzCtx.createRadialGradient(cursorInfluenceX, cursorInfluenceY, 0, cursorInfluenceX, cursorInfluenceY, 300);
+    mg2.addColorStop(0, 'rgba(255,255,255,0.018)');
+    mg2.addColorStop(1, 'transparent');
+    nzCtx.fillStyle = mg2;
+    nzCtx.fillRect(0, 0, nzW, nzH);
+
+    // Stars
+    const t = performance.now() * 0.001;
+    nzStars.forEach(s => {
+        s.flicker += s.flickerSpeed;
+        const alpha = 0.15 + Math.sin(s.flicker) * 0.12;
+        nzCtx.beginPath();
+        nzCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        nzCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+        nzCtx.fill();
+    });
+
+    // Drifting light streaks
+    nzParticles.forEach(p => {
+        p.y += p.speed;
+        if (p.y > nzH + p.len) { p.y = -p.len; p.x = Math.random() * nzW; }
+
+        const grad = nzCtx.createLinearGradient(p.x, p.y - p.len, p.x, p.y);
+        grad.addColorStop(0, 'transparent');
+        grad.addColorStop(1, `rgba(255,255,255,${p.opacity})`);
+        nzCtx.strokeStyle = grad;
+        nzCtx.lineWidth = p.width;
+        nzCtx.beginPath();
+        nzCtx.moveTo(p.x, p.y - p.len);
+        nzCtx.lineTo(p.x, p.y);
+        nzCtx.stroke();
+    });
+
+    requestAnimationFrame(drawNzCanvas);
+}
+drawNzCanvas();
 
 /* ══════════════════════════════════════════
    SCROLL REVEAL
@@ -2223,6 +2445,8 @@ function switchMode() {
             document.getElementById('layer-neonz').classList.add('active');
             document.getElementById('mbtn-eng').classList.remove('active');
             document.getElementById('mbtn-nz').classList.add('active');
+            document.getElementById('nav-brand').textContent = 'NEONZ';
+            document.getElementById('chat-widget-name').textContent = 'NEONZ Assistant';
             soLog.textContent = '[SYS] NEONZ Media Engine — Online';
             document.querySelectorAll('.scramble-el').forEach(scramble);
         } else {
@@ -2231,6 +2455,8 @@ function switchMode() {
             document.getElementById('layer-eng').classList.add('active');
             document.getElementById('mbtn-nz').classList.remove('active');
             document.getElementById('mbtn-eng').classList.add('active');
+            document.getElementById('nav-brand').textContent = 'ABDULRAHMAN';
+            document.getElementById('chat-widget-name').textContent = 'AAM Assistant';
             soLog.textContent = '[SYS] AI Logic Engine — Online';
         }
         checkReveal();
