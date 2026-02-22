@@ -11,7 +11,6 @@
             /* ENGINEER MODE */
             --bg: #020617;
             --surface: #0f172a;
-            --surface-hover: #1e293b;
             --accent: #00f0ff;
             --accent-glow: rgba(0, 240, 255, 0.5);
             --text-main: #f8fafc;
@@ -19,14 +18,13 @@
             --font-primary: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --font-display: 'Syncopate', sans-serif;
-            --card-border: rgba(0, 240, 255, 0.1);
+            --card-border: rgba(0, 240, 255, 0.15);
         }
 
         body.creator-mode {
             /* NEONZ MODE */
             --bg: #000000;
             --surface: #0a0a0a;
-            --surface-hover: #171717;
             --accent: #ffffff;
             --accent-glow: rgba(255, 255, 255, 0.4);
             --text-main: #ffffff;
@@ -36,7 +34,6 @@
 
         /* === RESET & GLOBAL === */
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        
         ::selection { background: var(--accent); color: var(--bg); }
 
         body {
@@ -49,126 +46,105 @@
 
         /* === CUSTOM CURSOR === */
         #cursor-dot {
-            width: 6px; height: 6px; background: var(--accent);
-            position: fixed; border-radius: 50%;
-            pointer-events: none; z-index: 10000;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--accent);
+            width: 8px; height: 8px; background: var(--accent);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 10000;
+            transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--accent);
+            transition: background 0.3s, box-shadow 0.3s;
         }
         #cursor-ring {
-            width: 30px; height: 30px; border: 1px solid var(--accent);
-            position: fixed; border-radius: 50%;
-            pointer-events: none; z-index: 9999;
+            width: 35px; height: 35px; border: 1.5px solid var(--accent);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
+            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
         }
-        .hovering #cursor-ring {
-            width: 50px; height: 50px; background: rgba(255,255,255,0.05);
-        }
+        .hovering #cursor-ring { width: 60px; height: 60px; background: rgba(255,255,255,0.05); }
 
         /* === BACKGROUNDS === */
-        #particle-canvas {
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        
+        /* Scanlines for Engineer Mode */
+        .scanlines {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px; z-index: 1; pointer-events: none; opacity: 0.5;
         }
+        body.creator-mode .scanlines { opacity: 0; }
 
         .phoenix-wrapper {
-            position: fixed; top: 50%; left: 50%;
-            width: 100vw; height: 100vh;
-            transform: translate(-50%, -50%);
-            z-index: 0; pointer-events: none;
+            position: fixed; top: 50%; left: 50%; width: 100vw; height: 100vh;
+            transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
             display: flex; justify-content: center; align-items: center;
             opacity: 0; transition: opacity 1s ease;
         }
-
-        body.creator-mode .phoenix-wrapper { opacity: 0.15; }
-
+        body.creator-mode .phoenix-wrapper { opacity: 0.12; }
         .phoenix-bg {
-            width: 80vh; height: 80vh;
-            background-image: url('image_4b931f.png');
-            background-size: contain; background-repeat: no-repeat; background-position: center;
-            filter: drop-shadow(0 0 50px #fff);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 85vh; height: 85vh;
+            background-image: url('image_4b931f.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
+            filter: drop-shadow(0 0 50px #fff); transition: transform 0.1s linear;
         }
 
         /* === NAVIGATION === */
         nav {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1400px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 100px;
+            position: fixed; top: 25px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px;
+            background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border); border-radius: 100px;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 30px; z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 12px 30px; z-index: 100; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             transition: background 0.5s, border-color 0.5s;
         }
+        body.creator-mode nav { background: rgba(10, 10, 10, 0.6); }
 
-        body.creator-mode nav { background: rgba(10, 10, 10, 0.7); }
-
-        .nav-brand { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; }
+        .nav-brand { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; text-shadow: 0 0 10px var(--accent-glow); }
         
-        /* Dual Toggle Switch */
         .toggle-capsule {
-            display: flex; background: rgba(0,0,0,0.4);
-            border-radius: 50px; padding: 5px; position: relative;
-            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; background: rgba(0,0,0,0.6); border-radius: 50px; padding: 5px; position: relative;
+            border: 1px solid rgba(255,255,255,0.1); cursor: none;
         }
         .toggle-slider {
-            position: absolute; top: 5px; left: 5px;
-            width: calc(50% - 5px); height: calc(100% - 10px);
+            position: absolute; top: 5px; left: 5px; width: calc(50% - 5px); height: calc(100% - 10px);
             background: var(--accent); border-radius: 50px;
-            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1); box-shadow: 0 0 20px var(--accent-glow);
         }
         body.creator-mode .toggle-slider { transform: translateX(100%); }
-        
         .toggle-btn {
-            position: relative; z-index: 2; padding: 8px 24px;
-            font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;
+            position: relative; z-index: 2; padding: 10px 25px;
+            font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;
             color: var(--text-muted); transition: color 0.5s;
         }
         .toggle-btn.active { color: var(--bg); }
 
         .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .nav-link:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-link:hover { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
 
         /* === MAIN CONTAINER === */
         .app-core {
-            position: relative; z-index: 10;
-            max-width: 1400px; margin: 120px auto 0 auto; padding: 0 20px;
-            min-height: calc(100vh - 120px);
+            position: relative; z-index: 10; max-width: 1300px; margin: 130px auto 0 auto; padding: 0 20px 80px 20px;
+            min-height: calc(100vh - 130px);
         }
 
         .view-layer { display: none; animation: viewFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .view-layer.active { display: block; }
-
         @keyframes viewFade {
-            0% { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(10px); }
+            0% { opacity: 0; transform: scale(0.98) translateY(20px); filter: blur(5px); }
             100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
 
         /* === HERO SECTION === */
-        .hero { display: flex; align-items: center; justify-content: space-between; min-height: 60vh; }
-        
-        .hero-text { flex: 1.2; }
+        .hero { display: flex; align-items: center; justify-content: space-between; min-height: 55vh; gap: 40px; }
+        .hero-text { flex: 1.2; perspective: 1000px; }
         .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 5rem);
-            line-height: 1; margin-bottom: 20px;
-            text-transform: uppercase; letter-spacing: -2px;
+            font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -2px;
+            text-shadow: 0 0 30px var(--accent-glow);
         }
         .hero-subtitle {
-            font-family: var(--font-mono); font-size: 1.2rem;
-            color: var(--accent); margin-bottom: 30px; display: inline-block;
-            border-right: 2px solid var(--accent); padding-right: 8px;
-            animation: caret 1s step-end infinite;
+            font-family: var(--font-mono); font-size: 1.2rem; color: var(--accent); margin-bottom: 25px; display: inline-block;
+            border-right: 2px solid var(--accent); padding-right: 8px; animation: caret 1s step-end infinite;
         }
         @keyframes caret { 50% { border-color: transparent; } }
-
-        .hero-desc { font-size: 1.15rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; margin-bottom: 40px; }
+        .hero-desc { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; max-width: 600px; margin-bottom: 40px; }
 
         /* Holographic Avatar */
         .hero-avatar-zone {
@@ -176,137 +152,135 @@
             position: relative; height: 500px;
         }
         .avatar-holo {
-            max-height: 100%; max-width: 100%; object-fit: contain;
-            position: relative; z-index: 2;
-            filter: drop-shadow(0 0 20px var(--accent-glow));
-            animation: holoFloat 6s ease-in-out infinite;
+            max-height: 100%; max-width: 100%; object-fit: contain; position: relative; z-index: 2;
+            filter: drop-shadow(0 0 25px var(--accent-glow)); animation: holoFloat 5s ease-in-out infinite;
         }
-        @keyframes holoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+        @keyframes holoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
-        /* The Scanner Line */
         .scanner-line {
-            position: absolute; top: 0; left: 10%; width: 80%; height: 4px;
-            background: var(--accent); box-shadow: 0 0 20px 5px var(--accent-glow);
-            z-index: 3; opacity: 0.6; border-radius: 50%;
-            animation: scan 3s linear infinite;
+            position: absolute; top: 0; left: 15%; width: 70%; height: 3px;
+            background: var(--accent); box-shadow: 0 0 25px 5px var(--accent-glow);
+            z-index: 3; opacity: 0.7; border-radius: 50%; animation: scan 3s linear infinite;
         }
-        @keyframes scan {
-            0% { top: 10%; opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { top: 90%; opacity: 0; }
-        }
+        @keyframes scan { 0% { top: 5%; opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { top: 95%; opacity: 0; } }
 
-        /* Hologram Base */
         .holo-base {
-            position: absolute; bottom: -20px; width: 300px; height: 60px;
-            border-radius: 50%; border: 2px solid var(--accent-glow);
-            background: radial-gradient(ellipse at center, rgba(0,240,255,0.1) 0%, transparent 60%);
-            transform: rotateX(70deg); box-shadow: 0 0 30px var(--accent-glow);
-            z-index: 1; animation: basePulse 2s infinite alternate;
+            position: absolute; bottom: -20px; width: 350px; height: 50px; border-radius: 50%; border: 2px solid var(--accent-glow);
+            background: radial-gradient(ellipse at center, rgba(0,240,255,0.15) 0%, transparent 60%);
+            transform: rotateX(75deg); box-shadow: 0 0 40px var(--accent-glow); z-index: 1; animation: basePulse 2s infinite alternate;
         }
-        body.creator-mode .holo-base { background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 60%); }
-        @keyframes basePulse { 100% { transform: rotateX(70deg) scale(1.1); } }
+        body.creator-mode .holo-base { background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 60%); }
+        @keyframes basePulse { 100% { transform: rotateX(75deg) scale(1.1); } }
 
-        /* === MAGNETIC MOUSE CARDS (WOW EFFECT) === */
+        /* === 3D MAGNETIC CARDS === */
         .section-header {
-            font-family: var(--font-display); font-size: 2rem;
-            margin: 60px 0 30px 0; color: var(--text-main); text-transform: uppercase;
+            font-family: var(--font-display); font-size: 2.2rem; margin: 80px 0 40px 0; color: var(--text-main); text-transform: uppercase;
         }
 
         .bento-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;
-            margin-bottom: 80px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-bottom: 60px;
+            perspective: 1500px; /* Essential for 3D tilt */
+        }
+
+        .card-wrapper {
+            position: relative; transform-style: preserve-3d; transition: transform 0.1s ease;
         }
 
         .magic-card {
-            background-color: var(--surface);
-            border-radius: 20px; position: relative;
-            cursor: none;
-            /* Spotlight Border Effect via CSS Variables */
+            background-color: var(--surface); border-radius: 20px; position: relative; height: 100%;
+            transform: translateZ(20px); /* Lifts the card slightly towards viewer */
         }
+        
         .magic-card::before {
-            content: ""; position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 20px; padding: 2px; /* Border thickness */
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y),
-                var(--accent), transparent 40%
-            );
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 20px; padding: 2px;
+            background: radial-gradient( 800px circle at var(--mouse-x) var(--mouse-y), var(--accent), transparent 40% );
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor; mask-composite: exclude;
             z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.5s;
         }
-        .magic-card:hover::before { opacity: 1; }
+        .card-wrapper:hover .magic-card::before { opacity: 1; }
         
         .magic-card-content {
-            background-color: var(--surface); border-radius: 18px;
-            padding: 30px; height: 100%; position: relative; z-index: 2;
-            display: flex; flex-direction: column;
+            background-color: var(--surface); border-radius: 18px; padding: 35px; height: 100%;
+            position: relative; z-index: 2; display: flex; flex-direction: column;
         }
         
-        /* Card Internals */
-        .card-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .card-text { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
+        .card-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+        .card-text { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
         
-        .pill-rack { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pill-rack { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
         .pill {
             background: rgba(255,255,255,0.03); border: 1px solid var(--card-border);
-            padding: 8px 16px; border-radius: 100px; font-family: var(--font-mono);
-            font-size: 0.85rem; font-weight: 700; color: var(--text-main);
+            padding: 8px 18px; border-radius: 100px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--text-main);
         }
 
-        /* Buttons */
+        /* === BUTTONS === */
         .btn-core {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 14px 28px; border-radius: 10px; text-decoration: none;
-            font-family: var(--font-mono); font-weight: 800; text-transform: uppercase;
-            font-size: 0.9rem; transition: all 0.3s; position: relative; overflow: hidden;
+            display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; border-radius: 12px; text-decoration: none;
+            font-family: var(--font-mono); font-weight: 800; text-transform: uppercase; font-size: 0.95rem; transition: all 0.3s;
         }
-        .btn-primary { background: var(--accent); color: var(--bg); box-shadow: 0 0 20px var(--accent-glow); }
-        .btn-primary:hover { box-shadow: 0 0 40px var(--accent-glow); transform: translateY(-2px); }
+        .btn-primary { background: var(--accent); color: var(--bg); box-shadow: 0 0 25px var(--accent-glow); }
+        .btn-primary:hover { box-shadow: 0 0 45px var(--accent-glow); transform: translateY(-3px); }
         
         .btn-outline { border: 1px solid var(--card-border); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.05); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.05); transform: translateY(-3px); }
 
-        /* === MOCK AI TERMINAL === */
-        .terminal-box { background: rgba(0,0,0,0.5); border-radius: 12px; padding: 20px; font-family: var(--font-mono); border: 1px solid var(--card-border); }
-        .term-header { display: flex; gap: 8px; margin-bottom: 15px; }
-        .term-dot { width: 12px; height: 12px; border-radius: 50%; background: #334155; }
-        .term-dot:nth-child(1) { background: #ef4444; }
-        .term-dot:nth-child(2) { background: #f59e0b; }
-        .term-dot:nth-child(3) { background: #10b981; }
-        .term-line { margin-bottom: 10px; font-size: 0.9rem; }
-        .term-user { color: #fff; }
-        .term-ai { color: var(--accent); }
+        /* === INTERACTIVE CHATBOT (AAM-CORE) === */
+        .chatbot-container {
+            display: flex; flex-direction: column; height: 350px; background: rgba(0,0,0,0.4);
+            border-radius: 12px; border: 1px solid var(--card-border); overflow: hidden; font-family: var(--font-primary);
+        }
+        .chat-header {
+            background: rgba(255,255,255,0.05); padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--card-border);
+        }
+        .bot-avatar { width: 30px; height: 30px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent-glow); display: flex; justify-content: center; align-items: center; color: var(--bg); font-weight: bold; font-size: 0.8rem;}
+        
+        .chat-history {
+            flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
+        }
+        /* Custom scrollbar for chat */
+        .chat-history::-webkit-scrollbar { width: 6px; }
+        .chat-history::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
-        /* === REBOOT SEQUENCE === */
+        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; animation: popIn 0.3s ease forwards;}
+        @keyframes popIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .msg-bot { background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.2); color: var(--text-main); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: var(--surface-hover); border: 1px solid var(--card-border); color: var(--text-main); align-self: flex-end; border-bottom-right-radius: 2px; }
+        
+        .chat-input-area {
+            display: flex; padding: 15px; border-top: 1px solid var(--card-border); background: rgba(0,0,0,0.2);
+        }
+        .chat-input {
+            flex-grow: 1; background: transparent; border: none; color: #fff; font-family: var(--font-primary); font-size: 0.95rem; padding: 5px; outline: none;
+        }
+        .chat-input::placeholder { color: var(--text-muted); }
+        .chat-send {
+            background: transparent; border: none; color: var(--accent); font-weight: bold; padding: 0 10px; cursor: none; transition: 0.2s;
+        }
+        .chat-send:hover { text-shadow: 0 0 10px var(--accent-glow); transform: scale(1.1); }
+
+        .typing-indicator { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; margin-top: 5px; display: none; }
+
+        /* === REBOOT OVERLAY === */
         #reboot-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 99999; display: flex; flex-direction: column;
+            background: #020617; z-index: 99999; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 40px;
             opacity: 0; pointer-events: none; transition: opacity 0.2s;
         }
         #reboot-overlay.active { opacity: 1; pointer-events: auto; }
         
         .glitch-text {
-            font-family: var(--font-mono); font-size: 2rem; font-weight: 800;
-            color: var(--accent); text-transform: uppercase; text-align: center;
+            font-family: var(--font-display); font-size: 2.5rem; color: var(--accent); text-transform: uppercase; text-align: center; letter-spacing: 2px;
         }
-        .progress-bar {
-            width: 300px; height: 4px; background: #222; margin-top: 20px;
-            position: relative; overflow: hidden;
-        }
-        .progress-fill {
-            position: absolute; top: 0; left: 0; height: 100%; background: var(--accent);
-            width: 0%; box-shadow: 0 0 20px var(--accent);
-        }
+        .progress-bar { width: 400px; height: 2px; background: #1e293b; margin-top: 30px; position: relative; overflow: hidden; }
+        .progress-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent); width: 0%; box-shadow: 0 0 20px var(--accent); }
+        .hex-logs { font-family: var(--font-mono); color: var(--text-muted); margin-top: 20px; font-size: 0.85rem; height: 60px; overflow: hidden; text-align: center; line-height: 1.5;}
 
         @media (max-width: 1024px) {
-            .hero { flex-direction: column; text-align: center; margin-top: 40px; }
+            .hero { flex-direction: column; text-align: center; margin-top: 20px; }
             .hero-avatar-zone { height: 400px; width: 100%; }
             .nav-links { display: none; }
         }
@@ -314,11 +288,12 @@
 </head>
 <body>
 
-<!-- Custom Cursor -->
+<!-- Custom Magnetic Cursor -->
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
 <!-- Backgrounds -->
+<div class="scanlines"></div>
 <canvas id="particle-canvas"></canvas>
 <div class="phoenix-wrapper">
     <div class="phoenix-bg" id="phoenix-parallax"></div>
@@ -326,18 +301,16 @@
 
 <!-- Reboot Overlay -->
 <div id="reboot-overlay">
-    <div class="glitch-text" id="rb-text">SYSTEM OVERRIDE INITIATED</div>
+    <div class="glitch-text" id="rb-text">SYSTEM OVERRIDE</div>
     <div class="progress-bar"><div class="progress-fill" id="rb-fill"></div></div>
-    <div style="font-family: var(--font-mono); color: #555; margin-top: 20px; font-size: 0.8rem;" id="rb-logs">
-        [SYS] Unmounting previous modules...<br>[SYS] Loading new neural pathways...
-    </div>
+    <div class="hex-logs" id="rb-logs"></div>
 </div>
 
 <!-- Navigation -->
 <nav class="interactable">
     <div class="nav-brand">AAM_CORE</div>
     
-    <div class="toggle-capsule" onclick="triggerSystemSwitch()">
+    <div class="toggle-capsule interactable" onclick="triggerSystemSwitch()">
         <div class="toggle-slider"></div>
         <div class="toggle-btn active" id="btn-eng">AI.ENG</div>
         <div class="toggle-btn" id="btn-cr">NEONZ</div>
@@ -347,7 +320,7 @@
         <a href="https://linkedin.com" target="_blank" class="nav-link interactable">LinkedIn</a>
         <a href="https://github.com" target="_blank" class="nav-link interactable">GitHub</a>
         <a href="mailto:abdulrahman2004an@gmail.com" class="nav-link interactable">Contact</a>
-        <a href="#" class="btn-core btn-outline interactable" style="padding: 8px 20px; font-size: 0.8rem;">Download CV</a>
+        <a href="#" class="btn-core btn-outline interactable" style="padding: 10px 24px; font-size: 0.85rem;">Download CV</a>
     </div>
 </nav>
 
@@ -365,7 +338,7 @@
                 <p class="hero-desc">BSc in Artificial Intelligence at APU (GPA: 3.65). I engineer intelligent logic systems, complex RAG pipelines, and robust data architectures.</p>
                 <div style="display: flex; gap: 20px; margin-top: 20px;">
                     <a href="#projects-grid" class="btn-core btn-primary interactable">View Projects</a>
-                    <a href="https://github.com" target="_blank" class="btn-core btn-outline interactable">GitHub</a>
+                    <a href="https://github.com" target="_blank" class="btn-core btn-outline interactable">GitHub Profiler</a>
                 </div>
             </div>
             <div class="hero-avatar-zone">
@@ -377,36 +350,42 @@
 
         <h2 class="section-header">Technical Infrastructure</h2>
         <div class="bento-grid">
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">💻 Programming Core</div>
-                    <div class="card-text">Foundation in logic and high-performance computing.</div>
-                    <div class="pill-rack">
-                        <span class="pill">Python</span><span class="pill">Java</span>
-                        <span class="pill">C#</span><span class="pill">R</span>
-                        <span class="pill">PostgreSQL</span><span class="pill">SQL</span>
+            <div class="card-wrapper">
+                <div class="magic-card interactable">
+                    <div class="magic-card-content">
+                        <div class="card-title">💻 Programming Core</div>
+                        <div class="card-text">Foundation in logic and high-performance computing.</div>
+                        <div class="pill-rack">
+                            <span class="pill">Python</span><span class="pill">Java</span>
+                            <span class="pill">C#</span><span class="pill">R</span>
+                            <span class="pill">PostgreSQL</span><span class="pill">SQL</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">🧠 AI & Data Systems</div>
-                    <div class="card-text">Building the brains behind modern applications.</div>
-                    <div class="pill-rack">
-                        <span class="pill">RAG Pipelines</span><span class="pill">LLMs</span>
-                        <span class="pill">Data Analysis</span><span class="pill">Machine Learning</span>
+            <div class="card-wrapper">
+                <div class="magic-card interactable">
+                    <div class="magic-card-content">
+                        <div class="card-title">🧠 AI & Data Systems</div>
+                        <div class="card-text">Building the brains behind modern applications.</div>
+                        <div class="pill-rack">
+                            <span class="pill">RAG Pipelines</span><span class="pill">LLMs</span>
+                            <span class="pill">Data Analysis</span><span class="pill">Machine Learning</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">📜 Verified Clearances</div>
-                    <div class="card-text">Official industry certifications and academic standing.</div>
-                    <div class="pill-rack">
-                        <span class="pill">AWS ML Foundations</span><span class="pill">Cisco CCNA</span>
-                        <span class="pill">Red Hat SysAdmin</span>
+            <div class="card-wrapper">
+                <div class="magic-card interactable">
+                    <div class="magic-card-content">
+                        <div class="card-title">📜 Verified Clearances</div>
+                        <div class="card-text">Official industry certifications and academic standing.</div>
+                        <div class="pill-rack">
+                            <span class="pill">AWS ML Foundations</span><span class="pill">Cisco CCNA</span>
+                            <span class="pill">Red Hat SysAdmin</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -416,39 +395,59 @@
         <div class="bento-grid">
             
             <!-- Project Placeholder 1 -->
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">🌐 [Project Title 1]</div>
-                    <div class="card-text">A brief description of your project. Detail the problem it solves, the intelligence behind it, and the tech stack utilized.</div>
-                    <div class="pill-rack" style="margin-bottom: 20px;">
-                        <span class="pill" style="border-color: #3b82f6;">Python</span><span class="pill" style="border-color: #3b82f6;">React</span>
+            <div class="card-wrapper">
+                <div class="magic-card interactable">
+                    <div class="magic-card-content">
+                        <div class="card-title">🌐 [Project Title 1]</div>
+                        <div class="card-text">A brief description of your project. Detail the problem it solves, the intelligence behind it, and the tech stack utilized. Send me the text later!</div>
+                        <div class="pill-rack" style="margin-bottom: 25px;">
+                            <span class="pill">Python</span><span class="pill">React</span>
+                        </div>
+                        <a href="#" class="btn-core btn-outline interactable" style="width: fit-content; padding: 12px 24px;">View Repository</a>
                     </div>
-                    <a href="#" class="btn-core btn-outline" style="width: fit-content; padding: 10px 20px;">View Repository</a>
                 </div>
             </div>
 
             <!-- Project Placeholder 2 -->
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">⚙️ [Project Title 2]</div>
-                    <div class="card-text">A brief description of your project. Detail the problem it solves, the intelligence behind it, and the tech stack utilized.</div>
-                    <div class="pill-rack" style="margin-bottom: 20px;">
-                        <span class="pill" style="border-color: #3b82f6;">Java</span><span class="pill" style="border-color: #3b82f6;">SQL</span>
+            <div class="card-wrapper">
+                <div class="magic-card interactable">
+                    <div class="magic-card-content">
+                        <div class="card-title">⚙️ [Project Title 2]</div>
+                        <div class="card-text">A brief description of your project. Detail the problem it solves, the intelligence behind it, and the tech stack utilized.</div>
+                        <div class="pill-rack" style="margin-bottom: 25px;">
+                            <span class="pill">Java</span><span class="pill">SQL</span>
+                        </div>
+                        <a href="#" class="btn-core btn-outline interactable" style="width: fit-content; padding: 12px 24px;">View Repository</a>
                     </div>
-                    <a href="#" class="btn-core btn-outline" style="width: fit-content; padding: 10px 20px;">View Repository</a>
                 </div>
             </div>
 
-            <!-- AI Bot Flex UI -->
-            <div class="magic-card interactable">
-                <div class="magic-card-content">
-                    <div class="card-title">🤖 AAM-Core Assistant</div>
-                    <div class="card-text">A custom RAG-powered interface demonstrating live system query capabilities.</div>
-                    <div class="terminal-box">
-                        <div class="term-header"><div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div></div>
-                        <div class="term-line term-user">> run query: "Who is Abdulrahman?"</div>
-                        <div class="term-line term-ai">[Searching DB...]</div>
-                        <div class="term-line term-ai">Found: AI Engineer at APU. Highly skilled in Python, Java, and LLM implementation. Status: Ready for deployment.</div>
+            <!-- FULLY INTERACTIVE AI CHATBOT -->
+            <div class="card-wrapper">
+                <div class="magic-card interactable" style="border-color: var(--accent);">
+                    <div class="magic-card-content" style="padding: 25px;">
+                        <div class="card-title" style="margin-bottom: 15px;">🤖 Ask 'AAM-Core'</div>
+                        
+                        <div class="chatbot-container">
+                            <div class="chat-header">
+                                <div class="bot-avatar">AI</div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.95rem;">AAM Assistant</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Powered by local CV Data</div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-history" id="chat-history">
+                                <div class="chat-msg msg-bot">Hello! I am Abdulrahman's localized AI. Ask me about his education, skills, or projects.</div>
+                            </div>
+                            <div class="typing-indicator" id="chat-typing">AAM-Core is thinking...</div>
+                            
+                            <div class="chat-input-area">
+                                <input type="text" id="chat-input" class="chat-input interactable" placeholder="Type a message..." onkeypress="handleChatEnter(event)">
+                                <button class="chat-send interactable" onclick="sendChatMessage()">SEND</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -467,49 +466,57 @@
                 <div class="hero-subtitle" style="color: #fff; border-color: #fff;">> Digital Content Creator</div>
                 <p class="hero-desc" style="color: #ccc;">Directing, producing, and engaging massive audiences across multiple digital pillars. Engineering retention through high-impact visual storytelling.</p>
                 <div style="display: flex; gap: 20px; margin-top: 20px;">
-                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="btn-core btn-primary interactable" style="background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.4);">Initialize YouTube</a>
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="btn-core btn-primary interactable" style="background: #fff; color: #000; box-shadow: 0 0 25px rgba(255,255,255,0.4);">Initialize YouTube</a>
                     <a href="mailto:abdulrahman2004an@gmail.com" class="btn-core btn-outline interactable">Business Email</a>
                 </div>
             </div>
             <div class="hero-avatar-zone">
-                <div class="scanner-line" style="background: #fff; box-shadow: 0 0 20px 5px rgba(255,255,255,0.5);"></div>
+                <div class="scanner-line" style="background: #fff; box-shadow: 0 0 25px 5px rgba(255,255,255,0.5);"></div>
                 <img src="image_4ba228.png" alt="Neonz Avatar" class="avatar-holo">
                 <div class="holo-base"></div>
             </div>
         </div>
 
         <h2 class="section-header" style="text-align: center; margin-top: 80px;">Content Directives</h2>
-        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
             
-            <div class="magic-card interactable" style="text-align: center;">
-                <div class="magic-card-content" style="align-items: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🎮</div>
-                    <div class="card-title" style="justify-content: center;">Gaming</div>
-                    <div class="card-text">High-energy gameplay, walkthroughs, and community-driven entertainment.</div>
+            <div class="card-wrapper">
+                <div class="magic-card interactable" style="text-align: center;">
+                    <div class="magic-card-content" style="align-items: center; justify-content: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">🎮</div>
+                        <div class="card-title" style="justify-content: center;">Gaming</div>
+                        <div class="card-text">High-energy gameplay, walkthroughs, and community-driven entertainment.</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="magic-card interactable" style="text-align: center;">
-                <div class="magic-card-content" style="align-items: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🌟</div>
-                    <div class="card-title" style="justify-content: center;">Influencing</div>
-                    <div class="card-text">Personality-driven connection, lifestyle, and digital trends.</div>
+            <div class="card-wrapper">
+                <div class="magic-card interactable" style="text-align: center;">
+                    <div class="magic-card-content" style="align-items: center; justify-content: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">🌟</div>
+                        <div class="card-title" style="justify-content: center;">Influencing</div>
+                        <div class="card-text">Personality-driven connection, lifestyle, and digital trends.</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="magic-card interactable" style="text-align: center;">
-                <div class="magic-card-content" style="align-items: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">🎬</div>
-                    <div class="card-title" style="justify-content: center;">Entertainment</div>
-                    <div class="card-text">Creative storytelling, challenges, and dynamic video concepts.</div>
+            <div class="card-wrapper">
+                <div class="magic-card interactable" style="text-align: center;">
+                    <div class="magic-card-content" style="align-items: center; justify-content: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">🎬</div>
+                        <div class="card-title" style="justify-content: center;">Entertainment</div>
+                        <div class="card-text">Creative storytelling, challenges, and dynamic video concepts.</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="magic-card interactable" style="text-align: center;">
-                <div class="magic-card-content" style="align-items: center;">
-                    <div style="font-size: 3rem; margin-bottom: 15px;">⚙️</div>
-                    <div class="card-title" style="justify-content: center;">Developer Series</div>
-                    <div class="card-text">Showcasing the technical side through coding and AI projects.</div>
+            <div class="card-wrapper">
+                <div class="magic-card interactable" style="text-align: center;">
+                    <div class="magic-card-content" style="align-items: center; justify-content: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">⚙️</div>
+                        <div class="card-title" style="justify-content: center;">Developer Series</div>
+                        <div class="card-text">Showcasing the technical side through coding and AI projects.</div>
+                    </div>
                 </div>
             </div>
 
@@ -519,65 +526,153 @@
 </div>
 
 <script>
-    /* === CUSTOM CURSOR LOGIC === */
+    /* =========================================
+       CUSTOM CURSOR LOGIC
+    ========================================= */
     const cursorDot = document.getElementById('cursor-dot');
     const cursorRing = document.getElementById('cursor-ring');
     
     window.addEventListener('mousemove', (e) => {
         cursorDot.style.left = e.clientX + 'px';
         cursorDot.style.top = e.clientY + 'px';
-        
-        // Slight delay for the ring to give a magnetic feel
         setTimeout(() => {
             cursorRing.style.left = e.clientX + 'px';
             cursorRing.style.top = e.clientY + 'px';
-        }, 50);
+        }, 60);
     });
 
-    // Hover effect on interactables
-    document.querySelectorAll('.interactable, .magic-card').forEach(el => {
+    document.querySelectorAll('.interactable, .magic-card, input').forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
         el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
     });
 
-    /* === MAGNETIC SPOTLIGHT CARDS === */
-    document.querySelectorAll('.magic-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
+    /* =========================================
+       3D TILT & MAGNETIC SPOTLIGHT
+    ========================================= */
+    document.querySelectorAll('.card-wrapper').forEach(wrapper => {
+        const card = wrapper.querySelector('.magic-card');
+        
+        wrapper.addEventListener('mousemove', e => {
+            // Magnetic Spotlight
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
+
+            // 3D Tilt Math
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -6; // Max 6 deg tilt
+            const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 6;
+            
+            wrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            wrapper.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
     });
 
-    /* === PARALLAX PHOENIX (CREATOR MODE) === */
+    /* =========================================
+       PARALLAX PARTICLES & PHOENIX
+    ========================================= */
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
     const phoenix = document.getElementById('phoenix-parallax');
+    let width, height, particles;
+    let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+
     window.addEventListener('mousemove', (e) => {
-        if(!document.body.classList.contains('creator-mode')) return;
-        const x = (window.innerWidth - e.pageX * 2) / 90;
-        const y = (window.innerHeight - e.pageY * 2) / 90;
-        phoenix.style.transform = `translateX(${x}px) translateY(${y}px) scale(1.05)`;
+        mouseX = e.clientX; mouseY = e.clientY;
+        
+        // Phoenix Parallax
+        if(document.body.classList.contains('creator-mode')) {
+            const x = (window.innerWidth / 2 - e.pageX) / 40;
+            const y = (window.innerHeight / 2 - e.pageY) / 40;
+            phoenix.style.transform = `translateX(${x}px) translateY(${y}px) scale(1.02)`;
+        }
     });
 
-    /* === TEXT SCRAMBLE DECODER === */
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    function initParticles() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        particles = [];
+        const count = Math.floor((width * height) / 10000); 
+        
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * width, y: Math.random() * height,
+                baseX: Math.random() * width, baseY: Math.random() * height,
+                size: Math.random() * 2 + 0.5, speedX: (Math.random() - 0.5) * 0.5, speedY: (Math.random() - 0.5) * 0.5
+            });
+        }
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, width, height);
+        const isCreator = document.body.classList.contains('creator-mode');
+        ctx.fillStyle = isCreator ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 240, 255, 0.4)';
+        const lineColor = isCreator ? '255, 255, 255' : '0, 240, 255';
+
+        // Parallax Offset based on mouse
+        let offsetX = (mouseX - width/2) * 0.05;
+        let offsetY = (mouseY - height/2) * 0.05;
+
+        particles.forEach(p => {
+            p.baseX += p.speedX; p.baseY += p.speedY;
+            if (p.baseX < 0 || p.baseX > width) p.speedX *= -1;
+            if (p.baseY < 0 || p.baseY > height) p.speedY *= -1;
+
+            p.x = p.baseX - offsetX * (p.size); // Parallax effect
+            p.y = p.baseY - offsetY * (p.size);
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Lines
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(${lineColor}, ${0.15 - dist/1000})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(drawParticles);
+    }
+    window.addEventListener('resize', initParticles);
+    initParticles();
+    drawParticles();
+
+    /* =========================================
+       SYSTEM REBOOT SEQUENCE & SCRAMBLE
+    ========================================= */
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>";
     function scrambleText(element) {
         let iterations = 0;
         const targetText = element.dataset.value;
         const interval = setInterval(() => {
             element.innerText = targetText.split("").map((letter, index) => {
                 if(index < iterations) return targetText[index];
-                return letters[Math.floor(Math.random() * 42)];
+                return letters[Math.floor(Math.random() * letters.length)];
             }).join("");
             if(iterations >= targetText.length) clearInterval(interval);
-            iterations += 1 / 3; // Speed of decode
+            iterations += 1 / 2; 
         }, 30);
     }
 
-    /* === SYSTEM SWITCH REBOOT SEQUENCE === */
     let currentMode = 'engineer';
-
     function triggerSystemSwitch() {
         const body = document.body;
         const overlay = document.getElementById('reboot-overlay');
@@ -590,140 +685,135 @@
         const btnEng = document.getElementById('btn-eng');
         const btnCr = document.getElementById('btn-cr');
 
-        // Determine target
         const targetMode = currentMode === 'engineer' ? 'creator' : 'engineer';
         currentMode = targetMode;
 
-        // Start Boot Sequence
+        // Boot UI
         overlay.classList.add('active');
         rbFill.style.width = '0%';
-        rbFill.style.transition = 'width 1.5s ease-in-out';
+        rbFill.style.transition = 'width 1.2s cubic-bezier(0.86, 0, 0.07, 1)';
         
-        setTimeout(() => { rbFill.style.width = '100%'; }, 100);
+        setTimeout(() => { rbFill.style.width = '100%'; }, 50);
+
+        // Fake Hex Code Generation for Logs
+        let hexInterval = setInterval(() => {
+            let hex = "";
+            for(let i=0; i<10; i++) hex += "0x" + Math.floor(Math.random()*16777215).toString(16).toUpperCase() + " ";
+            logs.innerHTML = `[SYS] Allocating memory...<br>${hex}<br>[SYS] Re-routing visual pathways...`;
+        }, 100);
 
         if(targetMode === 'creator') {
+            overlay.style.backgroundColor = "#000";
             rbText.style.color = "#ffffff";
             rbFill.style.background = "#ffffff";
             rbFill.style.boxShadow = "0 0 20px #ffffff";
             rbText.innerText = "OVERRIDE >> INIT MEDIA PROTOCOLS";
-            logs.innerHTML = "[SYS] Purging local caches...<br>[SYS] Booting NEONZ Visual Engine...<br>[SYS] SUCCESS.";
         } else {
+            overlay.style.backgroundColor = "#020617";
             rbText.style.color = "#00f0ff";
             rbFill.style.background = "#00f0ff";
             rbFill.style.boxShadow = "0 0 20px #00f0ff";
             rbText.innerText = "REBOOTING >> AAM_CORE";
-            logs.innerHTML = "[SYS] Establishing secure connection...<br>[SYS] Loading logic pathways...<br>[SYS] ONLINE.";
         }
 
-        // Swap actual content mid-transition
         setTimeout(() => {
+            clearInterval(hexInterval);
             if(targetMode === 'creator') {
                 body.classList.add('creator-mode');
-                layerEng.classList.remove('active');
-                layerCr.classList.add('active');
-                btnEng.classList.remove('active');
-                btnCr.classList.add('active');
+                layerEng.classList.remove('active'); layerCr.classList.add('active');
+                btnEng.classList.remove('active'); btnCr.classList.add('active');
+                logs.innerHTML = "[SYS] Media Engine Online.";
             } else {
                 body.classList.remove('creator-mode');
-                layerCr.classList.remove('active');
-                layerEng.classList.add('active');
-                btnCr.classList.remove('active');
-                btnEng.classList.add('active');
+                layerCr.classList.remove('active'); layerEng.classList.add('active');
+                btnCr.classList.remove('active'); btnEng.classList.add('active');
+                logs.innerHTML = "[SYS] Logic Engine Online.";
             }
-            // Trigger Scramble on active title
             const activeTitle = document.querySelector('.view-layer.active .scramble-text');
             if(activeTitle) scrambleText(activeTitle);
-            
-        }, 800);
+        }, 900);
 
-        // Remove Overlay
         setTimeout(() => {
             overlay.classList.remove('active');
-            rbFill.style.transition = 'none'; // reset
-        }, 1600);
+            rbFill.style.transition = 'none';
+        }, 1400);
     }
 
-    // Run scramble on load for default view
-    window.onload = () => {
-        scrambleText(document.querySelector('.view-layer.active .scramble-text'));
+    window.onload = () => { scrambleText(document.querySelector('.view-layer.active .scramble-text')); }
+
+    /* =========================================
+       FULLY INTERACTIVE CHATBOT LOGIC
+    ========================================= */
+    const chatHistory = document.getElementById('chat-history');
+    const chatInput = document.getElementById('chat-input');
+    const typingIndicator = document.getElementById('chat-typing');
+
+    // Simple AI brain based on your CV
+    const aiKnowledgeBase = [
+        { keywords: ["skill", "tech", "language", "program", "stack"], reply: "My core programming languages are Python, Java, C#, PostgreSQL, and R. I also have skills in Data Analysis, RAG Pipelines, and LLMs." },
+        { keywords: ["edu", "university", "study", "degree", "apu", "gpa"], reply: "I am currently pursuing a Bachelor of Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU) with a GPA of 3.65." },
+        { keywords: ["cert", "aws", "cisco", "red hat"], reply: "I hold certifications in AWS Machine Learning Foundations, Cisco CCNA (Introduction to Networks), and Red Hat System Administration I." },
+        { keywords: ["work", "experience", "job", "mentor", "admin"], reply: "I currently work as a Math Mentor at the APU Math Clinic. Previously, I was an Administrative Assistant at Success International School." },
+        { keywords: ["creator", "youtube", "video", "neonz", "channel"], reply: "I run the channel xc.neonz! I have over 6 years of experience in end-to-end video production, focusing on gaming, influencing, and developer series content." },
+        { keywords: ["hello", "hi", "hey", "who"], reply: "Hello! I am Abdulrahman's localized AI assistant. Ask me anything about his engineering skills, education, or projects!" }
+    ];
+
+    function handleChatEnter(e) {
+        if (e.key === 'Enter') sendChatMessage();
     }
 
-    /* === INTERACTIVE PARTICLE CANVAS === */
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let width, height, particles;
+    function sendChatMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
 
-    function initParticles() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        particles = [];
-        const count = Math.floor((width * height) / 12000); 
+        // 1. Add User Message
+        appendMessage(text, 'user');
+        chatInput.value = '';
+
+        // 2. Show Typing Indicator
+        typingIndicator.style.display = 'block';
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+
+        // 3. Process Reply (Simulate delay)
+        setTimeout(() => {
+            typingIndicator.style.display = 'none';
+            const reply = getAiResponse(text.toLowerCase());
+            appendMessage(reply, 'bot');
+        }, 1000 + Math.random() * 800);
+    }
+
+    function appendMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-msg msg-${sender}`;
+        chatHistory.appendChild(msgDiv);
         
-        for (let i = 0; i < count; i++) {
-            particles.push({
-                x: Math.random() * width, y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-                radius: Math.random() * 1.5 + 0.5
-            });
+        if(sender === 'bot') {
+            typeOutChat(msgDiv, text);
+        } else {
+            msgDiv.innerText = text;
+            chatHistory.scrollTop = chatHistory.scrollHeight;
         }
     }
 
-    // Mouse interaction for particles
-    let mouse = { x: null, y: null };
-    window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
-
-    function drawParticles() {
-        ctx.clearRect(0, 0, width, height);
-        
-        const isCreator = document.body.classList.contains('creator-mode');
-        ctx.fillStyle = isCreator ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 240, 255, 0.4)';
-        const lineColor = isCreator ? '255, 255, 255' : '0, 240, 255';
-
-        particles.forEach(p => {
-            // Movement
-            p.x += p.vx; p.y += p.vy;
-
-            // Bounce
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-
-            // Mouse Repulsion
-            if(mouse.x != null) {
-                let dx = mouse.x - p.x; let dy = mouse.y - p.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < 100) {
-                    p.x -= dx/20; p.y -= dy/20;
-                }
-            }
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fill();
-        });
-
-        // Lines
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(${lineColor}, ${0.15 - dist/800})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
-        requestAnimationFrame(drawParticles);
+    function typeOutChat(element, text) {
+        let idx = 0;
+        element.innerHTML = "";
+        const interval = setInterval(() => {
+            element.innerHTML += text.charAt(idx);
+            idx++;
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+            if (idx >= text.length) clearInterval(interval);
+        }, 20); // typing speed
     }
 
-    window.addEventListener('resize', initParticles);
-    initParticles();
-    drawParticles();
+    function getAiResponse(input) {
+        for (let entry of aiKnowledgeBase) {
+            if (entry.keywords.some(kw => input.includes(kw))) {
+                return entry.reply;
+            }
+        }
+        return "I'm a local AI trained strictly on Abdulrahman's CV. Try asking me about his 'skills', 'education', or 'experience'!";
+    }
 
 </script>
 </body>
