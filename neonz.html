@@ -1082,100 +1082,8 @@
     }
 
     /* ════════════════════════════════════════
-       CREATOR / NEONZ LAYER
+       CREATOR / NEONZ LAYER (legacy removed — new styles below)
     ════════════════════════════════════════ */
-    .neonz-hero {
-        min-height: 100vh;
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 40px; padding-top: 100px;
-    }
-    .neonz-title {
-        font-family: var(--font-display);
-        font-size: clamp(5rem, 12vw, 11rem);
-        line-height: 0.9; color: #fff;
-        letter-spacing: -3px;
-        text-transform: uppercase;
-    }
-    .neonz-sub {
-        font-family: var(--font-mono);
-        font-size: 1rem;
-        letter-spacing: 5px;
-        color: #555;
-        margin-top: 20px;
-        text-transform: uppercase;
-    }
-    .neonz-line {
-        width: 60px; height: 1px;
-        background: #fff;
-        margin: 30px 0;
-    }
-    .neonz-desc {
-        font-size: 1rem;
-        color: #777;
-        line-height: 1.8;
-        max-width: 480px;
-        margin-bottom: 40px;
-    }
-    .content-pillars {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1px;
-        background: rgba(255,255,255,0.06);
-        border-radius: 20px; overflow: hidden;
-        margin: 60px 0;
-    }
-    .pillar {
-        background: #000;
-        padding: 50px 40px;
-        transition: background 0.3s;
-        position: relative;
-        overflow: hidden;
-    }
-    .pillar::before {
-        content: '';
-        position: absolute; inset: 0;
-        background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.03) 0%, transparent 60%);
-        opacity: 0; transition: opacity 0.4s;
-    }
-    .pillar:hover::before { opacity: 1; }
-    .pillar:hover { background: #0a0a0a; }
-    .pillar-num {
-        font-family: var(--font-display);
-        font-size: 5rem; color: rgba(255,255,255,0.05);
-        line-height: 1; margin-bottom: 20px;
-    }
-    .pillar-title {
-        font-family: var(--font-display);
-        font-size: 2rem; text-transform: uppercase;
-        letter-spacing: 1px; margin-bottom: 10px; color: #fff;
-    }
-    .pillar-desc { font-size: 0.88rem; color: #555; line-height: 1.7; }
-
-    .yt-cta-section {
-        text-align: center;
-        padding: 80px 20px;
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 28px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
-        margin-bottom: 60px;
-    }
-    .yt-cta-title {
-        font-family: var(--font-display);
-        font-size: clamp(2.5rem, 5vw, 4.5rem);
-        text-transform: uppercase; color: #fff; margin-bottom: 16px;
-    }
-    .yt-cta-desc { color: #555; margin-bottom: 36px; font-size: 1rem; }
-    .yt-btn {
-        display: inline-flex; align-items: center; gap: 12px;
-        background: #fff; color: #000;
-        font-family: var(--font-mono); font-weight: 800;
-        font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
-        text-decoration: none;
-        padding: 18px 40px; border-radius: 14px;
-        box-shadow: 0 0 40px rgba(255,255,255,0.2);
-        transition: all 0.3s;
-    }
-    .yt-btn:hover { transform: translateY(-4px); box-shadow: 0 0 60px rgba(255,255,255,0.35); }
 
     /* ════════════════════════════════════════
        FOOTER
@@ -1243,19 +1151,355 @@
         .hero { flex-direction: column; text-align: center; padding-top: 120px; min-height: auto; padding-bottom: 60px; }
         .hero-right { height: 350px; width: 100%; }
         .hero-ctas { justify-content: center; }
-        .neonz-hero { flex-direction: column; text-align: center; padding-top: 120px; }
+        .nz-hero { flex-direction: column-reverse; padding-top: 140px; gap: 40px; }
+        .nz-avatar-zone { height: 360px; width: 100%; }
+        .nz-giant-title { font-size: clamp(5rem, 18vw, 9rem); }
+        .nz-pillars-grid { grid-template-columns: 1fr 1fr; }
+        .nz-collab-deco { font-size: 8rem; right: -10px; }
     }
     @media (max-width: 768px) {
         .nav-links { display: none; }
         .cv-btn { display: none; }
-        .content-pillars { grid-template-columns: 1fr; }
         footer { flex-direction: column; text-align: center; }
         .footer-copy { text-align: center; }
         .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        .nz-pillars-grid { grid-template-columns: 1fr; }
+        .nz-collab-title { font-size: 2.8rem; }
+        .nz-collab-deco { display: none; }
     }
     @media (max-width: 480px) {
         .stats-grid { grid-template-columns: 1fr; }
         .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════
+       NEONZ — COMPLETE VISUAL SYSTEM
+    ════════════════════════════════════════ */
+
+    /* Broadcast ticker bar */
+    .nz-broadcast-bar {
+        display: flex; align-items: stretch;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        height: 44px;
+        overflow: hidden;
+        margin-top: 80px; /* below nav */
+        position: relative;
+    }
+    .nz-onair {
+        display: flex; align-items: center; gap: 8px;
+        padding: 0 20px;
+        background: rgba(255,255,255,0.04);
+        border-right: 1px solid rgba(255,255,255,0.07);
+        font-family: var(--font-mono);
+        font-size: 0.68rem; font-weight: 800;
+        letter-spacing: 3px;
+        color: #fff;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .nz-onair-dot {
+        width: 7px; height: 7px;
+        background: #ff2a2a;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #ff2a2a;
+        animation: pulse-dot 1s infinite;
+    }
+    .nz-ticker-wrap {
+        flex: 1; overflow: hidden; position: relative;
+        display: flex; align-items: center;
+    }
+    .nz-ticker-wrap::before, .nz-ticker-wrap::after {
+        content: '';
+        position: absolute; top: 0; bottom: 0; width: 60px;
+        z-index: 2; pointer-events: none;
+    }
+    .nz-ticker-wrap::before { left: 0; background: linear-gradient(to right, #000, transparent); }
+    .nz-ticker-wrap::after  { right: 0; background: linear-gradient(to left, #000, transparent); }
+    .nz-ticker {
+        display: flex; gap: 28px; align-items: center;
+        animation: ticker-scroll 20s linear infinite;
+        white-space: nowrap;
+        font-family: var(--font-mono); font-size: 0.72rem;
+        color: rgba(255,255,255,0.35); letter-spacing: 1px;
+    }
+    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .nz-ticker-sep { color: rgba(255,255,255,0.15); font-size: 0.5rem; }
+
+    /* Hero */
+    .nz-hero {
+        display: flex; align-items: center;
+        justify-content: space-between;
+        gap: 60px;
+        padding: 80px 0 60px;
+        min-height: 90vh;
+    }
+
+    /* Avatar zone */
+    .nz-avatar-zone {
+        flex: 0.85;
+        position: relative;
+        height: 540px;
+        display: flex; justify-content: center; align-items: flex-end;
+    }
+    .nz-frame-corner {
+        position: absolute;
+        width: 22px; height: 22px;
+        border-color: rgba(255,255,255,0.3);
+        border-style: solid;
+        z-index: 4;
+        transition: all 0.4s;
+    }
+    .nz-avatar-zone:hover .nz-frame-corner { border-color: rgba(255,255,255,0.7); }
+    .nz-fc-tl { top: 0; left: 10%; border-width: 1px 0 0 1px; }
+    .nz-fc-tr { top: 0; right: 10%; border-width: 1px 1px 0 0; }
+    .nz-fc-bl { bottom: 10px; left: 10%; border-width: 0 0 1px 1px; }
+    .nz-fc-br { bottom: 10px; right: 10%; border-width: 0 1px 1px 0; }
+    .nz-scan-wrap { position: relative; z-index: 2; height: 100%; display: flex; align-items: flex-end; }
+    .nz-avatar-img {
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 0 30px rgba(255,255,255,0.15)) saturate(0) brightness(1.05);
+        animation: float 6s ease-in-out infinite;
+        transition: filter 0.5s;
+    }
+    .nz-avatar-zone:hover .nz-avatar-img {
+        filter: drop-shadow(0 0 50px rgba(255,255,255,0.3)) saturate(0) brightness(1.15);
+    }
+    .nz-holo-ring {
+        position: absolute; bottom: -10px;
+        width: 280px; height: 35px;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 70%);
+        transform: rotateX(80deg);
+        animation: ring-pulse 3s ease-in-out infinite alternate;
+        z-index: 1;
+    }
+
+    /* Floating stat bubbles */
+    .nz-bubble {
+        position: absolute;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.12);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 16px 20px;
+        text-align: center;
+        z-index: 5;
+        animation: float 5s ease-in-out infinite;
+    }
+    .nz-bubble-1 { top: 15%; left: 0; animation-delay: 0s; }
+    .nz-bubble-2 { bottom: 20%; right: 0; animation-delay: 1.5s; }
+    .nz-bubble-num {
+        font-family: var(--font-display);
+        font-size: 2rem; color: #fff; line-height: 1;
+    }
+    .nz-bubble-label {
+        font-family: var(--font-mono); font-size: 0.6rem;
+        letter-spacing: 2px; color: rgba(255,255,255,0.35);
+        margin-top: 4px;
+    }
+
+    /* Hero text */
+    .nz-hero-text { flex: 1.1; }
+    .nz-kicker {
+        font-family: var(--font-mono); font-size: 0.72rem;
+        letter-spacing: 4px; color: rgba(255,255,255,0.25);
+        text-transform: uppercase; margin-bottom: 20px;
+    }
+    .nz-giant-title {
+        font-family: var(--font-display);
+        font-size: clamp(6rem, 13vw, 12rem);
+        line-height: 0.9;
+        text-transform: uppercase;
+        letter-spacing: -4px;
+        margin-bottom: 24px;
+    }
+    .nz-outline {
+        -webkit-text-stroke: 1.5px rgba(255,255,255,0.8);
+        color: transparent;
+        display: block;
+        position: relative;
+        transition: -webkit-text-stroke 0.3s;
+    }
+    .nz-outline:hover { -webkit-text-stroke-color: #fff; }
+
+    /* Glitch effect on hover */
+    .nz-outline::before, .nz-outline::after {
+        content: attr(data-val);
+        position: absolute; top: 0; left: 0;
+        -webkit-text-stroke: 0;
+        opacity: 0;
+        transition: opacity 0.1s;
+    }
+    .nz-outline:hover::before {
+        color: rgba(255,50,50,0.4);
+        transform: translate(-3px, 0);
+        opacity: 1;
+    }
+    .nz-outline:hover::after {
+        color: rgba(50,200,255,0.4);
+        transform: translate(3px, 0);
+        opacity: 1;
+    }
+
+    .nz-subline {
+        display: flex; align-items: center; gap: 16px;
+        font-family: var(--font-mono); font-size: 0.78rem;
+        color: rgba(255,255,255,0.3); letter-spacing: 2px;
+        text-transform: uppercase; margin-bottom: 28px;
+    }
+    .nz-subline-mark { color: rgba(255,255,255,0.15); font-size: 1.2rem; }
+    .nz-desc {
+        font-size: 1rem; color: rgba(255,255,255,0.45);
+        line-height: 1.8; max-width: 500px; margin-bottom: 40px;
+    }
+    .nz-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .nz-yt-btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        background: #fff; color: #000;
+        font-family: var(--font-mono); font-weight: 800;
+        font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 30px; border-radius: 10px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.15);
+        transition: all 0.3s;
+        position: relative; overflow: hidden;
+    }
+    .nz-yt-btn::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.5s;
+    }
+    .nz-yt-btn:hover::before { transform: translateX(100%); }
+    .nz-yt-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(255,255,255,0.3); }
+
+    .nz-email-btn {
+        font-family: var(--font-mono); font-size: 0.82rem;
+        color: rgba(255,255,255,0.5); text-decoration: none;
+        letter-spacing: 1px; text-transform: uppercase;
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        transition: all 0.3s;
+    }
+    .nz-email-btn:hover { color: #fff; border-color: #fff; letter-spacing: 2px; }
+
+    /* Content pillars */
+    .nz-pillars-section { margin: 80px 0; }
+    .nz-section-label {
+        font-family: var(--font-mono); font-size: 0.7rem;
+        color: rgba(255,255,255,0.2); letter-spacing: 3px;
+        text-transform: uppercase; margin-bottom: 30px;
+    }
+    .nz-pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 18px; overflow: hidden;
+        background: rgba(255,255,255,0.03);
+        gap: 1px;
+    }
+    .nz-pillar {
+        background: #000;
+        padding: 44px 30px;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.4s;
+    }
+    .nz-pillar::before {
+        content: '';
+        position: absolute; bottom: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transform: scaleX(0);
+        transition: transform 0.4s var(--ease-out-expo);
+    }
+    .nz-pillar:hover::before { transform: scaleX(1); }
+    .nz-pillar:hover { background: #080808; }
+
+    .nz-pillar-bg-text {
+        position: absolute; top: -10px; right: -5px;
+        font-family: var(--font-display);
+        font-size: 6rem; color: rgba(255,255,255,0.025);
+        line-height: 1; pointer-events: none;
+        transition: color 0.4s;
+    }
+    .nz-pillar:hover .nz-pillar-bg-text { color: rgba(255,255,255,0.05); }
+
+    .nz-pillar-inner { position: relative; z-index: 2; }
+    .nz-pillar-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+    .nz-pillar-name {
+        font-family: var(--font-display);
+        font-size: 1.5rem; text-transform: uppercase;
+        color: #fff; letter-spacing: 0.5px; margin-bottom: 12px;
+    }
+    .nz-pillar-dash {
+        width: 24px; height: 1px;
+        background: rgba(255,255,255,0.2);
+        margin-bottom: 14px;
+        transition: width 0.4s, background 0.3s;
+    }
+    .nz-pillar:hover .nz-pillar-dash { width: 40px; background: rgba(255,255,255,0.5); }
+    .nz-pillar-body {
+        font-size: 0.84rem; color: rgba(255,255,255,0.35);
+        line-height: 1.7;
+    }
+    .nz-pillar-arrow {
+        font-size: 1.4rem; color: rgba(255,255,255,0.1);
+        margin-top: 20px; display: block;
+        transition: all 0.3s;
+    }
+    .nz-pillar:hover .nz-pillar-arrow { color: rgba(255,255,255,0.6); transform: translate(4px, -4px); }
+
+    /* Collab CTA section */
+    .nz-collab {
+        position: relative;
+        margin: 80px 0 60px;
+        padding: 80px 70px;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 24px;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+    }
+    .nz-collab-noise {
+        position: absolute; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-size: 150px;
+        opacity: 0.015; pointer-events: none;
+    }
+    .nz-collab-inner { position: relative; z-index: 2; max-width: 600px; }
+    .nz-collab-tag {
+        font-family: var(--font-mono); font-size: 0.7rem;
+        letter-spacing: 3px; color: rgba(255,255,255,0.25);
+        text-transform: uppercase; margin-bottom: 20px;
+    }
+    .nz-collab-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 6vw, 5rem);
+        text-transform: uppercase; line-height: 0.95;
+        color: #fff; margin-bottom: 24px;
+    }
+    .nz-collab-outline {
+        -webkit-text-stroke: 1.5px rgba(255,255,255,0.4);
+        color: transparent;
+        display: block;
+    }
+    .nz-collab-desc {
+        font-size: 0.95rem; color: rgba(255,255,255,0.35);
+        line-height: 1.7; margin-bottom: 40px; max-width: 420px;
+    }
+    .nz-collab-ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .nz-collab-deco {
+        position: absolute;
+        right: -20px; bottom: -30px;
+        font-family: var(--font-display);
+        font-size: 12rem;
+        color: rgba(255,255,255,0.015);
+        line-height: 1; letter-spacing: -5px;
+        pointer-events: none;
+        white-space: nowrap;
     }
     </style>
 </head>
@@ -1547,8 +1791,8 @@
                 <div class="project-card interactable reveal reveal-delay-2" style="border-color: rgba(0,229,255,0.3);">
                     <div class="project-num" style="opacity:0.04">AI</div>
                     <div class="project-tags">
-                        <span class="project-tag">Claude API</span>
-                        <span class="project-tag">AI</span>
+                        <span class="project-tag">AI Assistant</span>
+                        <span class="project-tag">Live</span>
                     </div>
                     <div class="project-title" style="margin-bottom:16px;">Ask AAM-Core</div>
 
@@ -1563,14 +1807,8 @@
                             </div>
                         </div>
 
-                        <!-- API Key Section -->
-                        <div class="api-key-section">
-                            <input type="password" id="api-key-inp" class="api-key-input interactable" placeholder="Anthropic API Key (optional — for real AI)" />
-                            <button class="api-key-btn interactable" onclick="setApiKey()">Set Key</button>
-                        </div>
-
                         <div class="chat-messages" id="chat-messages">
-                            <div class="chat-msg msg-ai">Hello! I'm Abdulrahman's AI assistant. Ask me about his skills, education, experience, or projects! Add your API key above for Claude-powered responses.</div>
+                            <div class="chat-msg msg-ai">Hey! I'm Abdulrahman's personal AI. Ask me anything about his skills, education, projects, or experience.</div>
                         </div>
 
                         <div class="suggested-qs" id="suggested-qs">
@@ -1595,59 +1833,155 @@
     <!-- ========== NEONZ LAYER ========== -->
     <div class="layer" id="layer-neonz">
 
-        <section class="neonz-hero">
-            <div>
-                <div style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 4px; color: #333; margin-bottom: 20px; text-transform: uppercase;">Digital Creator</div>
-                <h1 class="neonz-title scramble-el" data-val="NEONZ">NEONZ</h1>
-                <div class="neonz-sub">xc.neonz — Content Universe</div>
-                <div class="neonz-line"></div>
-                <p class="neonz-desc">Directing, producing, and building massive audiences across digital platforms. Six years of engineering retention through high-impact visual storytelling and personality-driven content.</p>
-                <div style="display:flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="yt-btn interactable" style="padding: 14px 28px; font-size: 0.8rem;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
-                        Open YouTube
-                    </a>
-                    <a href="mailto:abdulrahman2004an@gmail.com" class="btn-ghost interactable" style="border-color: rgba(255,255,255,0.15); color: #fff; padding: 14px 28px; font-size: 0.8rem;">Business Email</a>
+        <!-- BROADCAST TICKER -->
+        <div class="nz-broadcast-bar">
+            <div class="nz-onair">
+                <span class="nz-onair-dot"></span>
+                ON AIR
+            </div>
+            <div class="nz-ticker-wrap">
+                <div class="nz-ticker">
+                    <span>xc.neonz</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Gaming Content</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Digital Creator</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>6+ Years Online</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Business: xcn4ad@gmail.com</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>xc.neonz</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Gaming Content</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Digital Creator</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>6+ Years Online</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Business: xcn4ad@gmail.com</span>
+                    <span class="nz-ticker-sep">◆</span>
                 </div>
             </div>
-            <div style="flex:0.7; display:flex; justify-content:center; align-items:flex-end; position:relative; height:500px;">
-                <div class="scan-line" style="background:#fff; box-shadow: 0 0 30px 8px rgba(255,255,255,0.3);"></div>
-                <img src="image_4ba228.png" alt="Neonz" class="avatar-img" style="filter: drop-shadow(0 0 40px rgba(255,255,255,0.2));">
-                <div class="holo-ring" style="border-color:rgba(255,255,255,0.3); box-shadow: 0 0 30px rgba(255,255,255,0.1); background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);"></div>
+        </div>
+
+        <!-- NEONZ HERO — SPLIT LAYOUT -->
+        <section class="nz-hero">
+            <!-- Left — Avatar -->
+            <div class="nz-avatar-zone">
+                <div class="nz-frame-corner nz-fc-tl"></div>
+                <div class="nz-frame-corner nz-fc-tr"></div>
+                <div class="nz-frame-corner nz-fc-bl"></div>
+                <div class="nz-frame-corner nz-fc-br"></div>
+                <div class="nz-scan-wrap">
+                    <div class="scan-line" style="background:#fff; box-shadow: 0 0 20px 6px rgba(255,255,255,0.25);"></div>
+                    <img src="image_4ba228.png" alt="Neonz" class="nz-avatar-img">
+                </div>
+                <div class="nz-holo-ring"></div>
+                <!-- floating stat bubbles -->
+                <div class="nz-bubble nz-bubble-1">
+                    <div class="nz-bubble-num">6+</div>
+                    <div class="nz-bubble-label">YRS</div>
+                </div>
+                <div class="nz-bubble nz-bubble-2">
+                    <div class="nz-bubble-num">∞</div>
+                    <div class="nz-bubble-label">VIEWS</div>
+                </div>
+            </div>
+
+            <!-- Right — Text -->
+            <div class="nz-hero-text">
+                <div class="nz-kicker">Digital Content Creator</div>
+                <h1 class="nz-giant-title">
+                    <span class="nz-title-line nz-outline scramble-el" data-val="NEONZ">NEONZ</span>
+                </h1>
+                <div class="nz-subline">
+                    <span class="nz-subline-mark">—</span>
+                    <span>YouTube · Gaming · Influence · Dev</span>
+                </div>
+                <p class="nz-desc">
+                    Directing, producing, and building loyal audiences across platforms. Six years of engineering content that gets watched, shared, and remembered.
+                </p>
+                <div class="nz-cta-row">
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-yt-btn interactable">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
+                        Watch Now
+                    </a>
+                    <a href="mailto:xcn4ad@gmail.com" class="nz-email-btn interactable">
+                        Collab / Ads →
+                    </a>
+                </div>
             </div>
         </section>
 
-        <div class="content-pillars reveal">
-            <div class="pillar">
-                <div class="pillar-num">01</div>
-                <div class="pillar-title">Gaming</div>
-                <div class="pillar-desc">High-energy gameplay content, walkthroughs, and community-driven entertainment. Built for the players.</div>
+        <!-- CONTENT PILLARS — MAGAZINE GRID -->
+        <section class="nz-pillars-section reveal">
+            <div class="nz-section-label">// Content Directives</div>
+            <div class="nz-pillars-grid">
+                <div class="nz-pillar nz-pillar-gaming interactable">
+                    <div class="nz-pillar-bg-text">01</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🎮</div>
+                        <div class="nz-pillar-name">Gaming</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">High-energy gameplay, walkthroughs, and community entertainment built for the players.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-influence interactable">
+                    <div class="nz-pillar-bg-text">02</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🌟</div>
+                        <div class="nz-pillar-name">Influence</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">Personality-led storytelling, lifestyle, and digital culture. Authentic. Viral-ready.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-entertain interactable">
+                    <div class="nz-pillar-bg-text">03</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🎬</div>
+                        <div class="nz-pillar-name">Entertainment</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">Creative concepts, dynamic challenges, and video formats engineered to earn the watch.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-dev interactable">
+                    <div class="nz-pillar-bg-text">04</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">⚙️</div>
+                        <div class="nz-pillar-name">Dev Series</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">The builder mindset on camera. Coding, AI experiments, and technical storytelling.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
             </div>
-            <div class="pillar">
-                <div class="pillar-num">02</div>
-                <div class="pillar-title">Influencing</div>
-                <div class="pillar-desc">Personality-driven connection, lifestyle narratives, and digital culture. Authentic. Engaging. Viral-ready.</div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-num">03</div>
-                <div class="pillar-title">Entertainment</div>
-                <div class="pillar-desc">Creative storytelling, dynamic challenges, and concept-driven video formats that earn the watch.</div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-num">04</div>
-                <div class="pillar-title">Dev Series</div>
-                <div class="pillar-desc">Bridging the technical and the creative — showcasing AI, coding projects, and the builder mindset.</div>
-            </div>
-        </div>
+        </section>
 
-        <div class="yt-cta-section reveal">
-            <div class="yt-cta-title">Watch the Universe</div>
-            <div class="yt-cta-desc">6+ years of content. Gaming, creativity, technology. All on one channel.</div>
-            <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="yt-btn interactable">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
-                Initialize Channel
-            </a>
-        </div>
+        <!-- COLLAB CTA — CINEMATIC FULL-WIDTH -->
+        <section class="nz-collab reveal">
+            <div class="nz-collab-noise"></div>
+            <div class="nz-collab-inner">
+                <div class="nz-collab-tag">// Open for Business</div>
+                <h2 class="nz-collab-title">
+                    Let's Build<br>
+                    <span class="nz-collab-outline">Something.</span>
+                </h2>
+                <p class="nz-collab-desc">Brand deals, sponsored content, creative collabs — if it connects with an audience, let's talk.</p>
+                <div class="nz-collab-ctas">
+                    <a href="mailto:xcn4ad@gmail.com" class="nz-yt-btn interactable" style="font-size:0.9rem; padding:18px 38px;">
+                        xcn4ad@gmail.com
+                    </a>
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-email-btn interactable">
+                        View Channel ↗
+                    </a>
+                </div>
+            </div>
+            <div class="nz-collab-deco">NEONZ</div>
+        </section>
 
     </div><!-- /layer-neonz -->
 
@@ -1909,44 +2243,20 @@ function switchMode() {
 }
 
 /* ══════════════════════════════════════════
-   CHATBOT — WITH CLAUDE API SUPPORT
+   CHATBOT — AAM-CORE ASSISTANT
 ══════════════════════════════════════════ */
-let ANTHROPIC_KEY = null;
-const CV_DATA = {
-    name: 'Abdulrahman',
-    university: 'Asia Pacific University (APU)',
-    degree: 'BSc Computer Science (Hons) in Artificial Intelligence',
-    gpa: '3.65',
-    skills_programming: ['Python', 'Java', 'C#', 'R', 'PostgreSQL', 'SQL'],
-    skills_ai: ['RAG Pipelines', 'LLMs', 'Data Analysis', 'Machine Learning'],
-    certifications: ['AWS Machine Learning Foundations', 'Cisco CCNA (Intro to Networks)', 'Red Hat System Administration I'],
-    work: [
-        { role: 'Math Mentor', org: 'APU Math Clinic', period: '2024 - Present' },
-        { role: 'Administrative Assistant', org: 'Success International School', period: 'Previous' }
-    ],
-    creator: 'Runs the YouTube channel xc.neonz with 6+ years of video production experience, focusing on gaming, influencing, and developer content.',
-    email: 'abdulrahman2004an@gmail.com'
-};
-
 const KB = [
-    { kw: ['skill','tech','language','program','stack','code','python','java'], ans: `My core programming languages are Python, Java, C#, R, PostgreSQL, and SQL. On the AI side, I specialise in RAG Pipelines, LLM integration, Data Analysis, and Machine Learning.` },
-    { kw: ['edu','university','study','degree','apu','gpa','grade'], ans: `I'm studying BSc Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU) with a GPA of 3.65.` },
-    { kw: ['cert','aws','cisco','red hat','certif'], ans: `I hold three industry certifications: AWS Machine Learning Foundations, Cisco CCNA (Introduction to Networks), and Red Hat System Administration I.` },
-    { kw: ['work','experience','job','mentor','admin','career','employ'], ans: `Currently I work as a Math Mentor at the APU Math Clinic. Previously I was an Administrative Assistant at Success International School, managing operational workflows and data systems.` },
-    { kw: ['creator','youtube','video','neonz','channel','content'], ans: `I run xc.neonz on YouTube with 6+ years of end-to-end video production. Content pillars include Gaming, Influencing, Entertainment, and a Developer Series where I showcase coding & AI projects.` },
-    { kw: ['rag','pipeline','llm','ai','project','intelligent'], ans: `My key technical focus is building RAG (Retrieval-Augmented Generation) pipelines and integrating LLMs into production-grade applications. I handle everything from data ingestion to embedding to retrieval layers.` },
-    { kw: ['contact','email','hire','reach','linkedin'], ans: `You can reach Abdulrahman at abdulrahman2004an@gmail.com or connect on LinkedIn. For business/creator inquiries, the same email applies.` },
-    { kw: ['hello','hi','hey','who','what are you'], ans: `Hello! I'm AAM-Core, Abdulrahman's AI assistant. I'm trained on his CV and portfolio. Ask me about his skills, education, experience, or projects — or add your Anthropic API key above to chat with real Claude!` },
+    { kw: ['skill','tech','language','program','stack','code','python','java','c#','r ','sql'], ans: `Abdulrahman's core languages are Python, Java, C#, R, PostgreSQL, and SQL. On the AI side, he specialises in RAG Pipelines, LLM integration, Data Analysis, and Machine Learning.` },
+    { kw: ['edu','university','study','degree','apu','gpa','grade','uni'], ans: `He's studying BSc Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU), currently holding a GPA of 3.65.` },
+    { kw: ['cert','aws','cisco','red hat','certif','qualification'], ans: `Abdulrahman holds three industry certifications: AWS Machine Learning Foundations, Cisco CCNA (Introduction to Networks), and Red Hat System Administration I.` },
+    { kw: ['work','experience','job','mentor','admin','career','employ','role'], ans: `He currently works as a Math Mentor at the APU Math Clinic. Previously, he was an Administrative Assistant at Success International School, managing operations and data workflows.` },
+    { kw: ['creator','youtube','video','neonz','channel','content','xc'], ans: `He runs xc.neonz on YouTube — 6+ years of video production covering gaming, influencing, entertainment, and a developer series that bridges his tech and creative worlds.` },
+    { kw: ['rag','pipeline','llm','ai','machine learning','intelligent','model'], ans: `His key technical focus is building RAG (Retrieval-Augmented Generation) pipelines and integrating LLMs into real applications — from data ingestion all the way through to the retrieval layer.` },
+    { kw: ['project','build','built','made','portfolio'], ans: `His projects are showcased on this portfolio! They include work in Python, RAG pipelines, Java, and more. Scroll up to the Projects section for the full breakdown.` },
+    { kw: ['contact','email','hire','reach','linkedin','collab','business','partner','ad','sponsor'], ans: `For professional enquiries, reach Abdulrahman at abdulrahman2004an@gmail.com or connect on LinkedIn. For business / creator partnerships, use xcn4ad@gmail.com.` },
+    { kw: ['hello','hi','hey','sup','who are you','what are you'], ans: `Hey! I'm AAM-Core — Abdulrahman's personal AI assistant. Ask me about his skills, education, projects, or experience and I'll tell you everything I know.` },
+    { kw: ['where','location','based','country','malaysia'], ans: `Abdulrahman is based in Malaysia, studying at Asia Pacific University (APU).` },
 ];
-
-function setApiKey() {
-    const inp = document.getElementById('api-key-inp');
-    const key = inp.value.trim();
-    if (!key) return;
-    ANTHROPIC_KEY = key;
-    inp.value = ''; inp.placeholder = '✓ API Key set — real Claude active!';
-    addMsg('ai', '✅ Claude API connected! I can now answer anything intelligently about Abdulrahman or beyond.');
-}
 
 function askSuggested(btn) {
     document.getElementById('chat-inp').value = btn.textContent;
@@ -1993,42 +2303,16 @@ async function sendMsg() {
     addMsg('user', text);
     const typing = showTyping();
 
-    try {
-        let reply;
-        if (ANTHROPIC_KEY) {
-            // Use real Claude API
-            const systemPrompt = `You are AAM-Core, the AI assistant for Abdulrahman's portfolio website. You have access to his CV data: ${JSON.stringify(CV_DATA)}. Answer questions about him concisely and engagingly. If questions are off-topic, briefly redirect to his portfolio but still try to be helpful.`;
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': ANTHROPIC_KEY,
-                    'anthropic-version': '2023-06-01',
-                    'anthropic-dangerous-direct-browser-access': 'true'
-                },
-                body: JSON.stringify({
-                    model: 'claude-haiku-4-5-20251001',
-                    max_tokens: 300,
-                    system: systemPrompt,
-                    messages: [{ role: 'user', content: text }]
-                })
-            });
-            if (!response.ok) throw new Error('API error');
-            const data = await response.json();
-            reply = data.content[0].text;
-        } else {
-            // Local KB lookup
-            await new Promise(r => setTimeout(r, 800 + Math.random() * 600));
-            const query = text.toLowerCase();
-            const match = KB.find(e => e.kw.some(k => query.includes(k)));
-            reply = match ? match.ans : "I'm a local assistant trained on Abdulrahman's CV. Try asking about his 'skills', 'education', 'certifications', or 'experience'. For smarter answers, add your Anthropic API key above!";
-        }
-        typing.remove();
-        addMsg('ai', reply);
-    } catch(e) {
-        typing.remove();
-        addMsg('ai', 'Hmm, there was an issue fetching a response. Check your API key or try again!');
-    }
+    await new Promise(r => setTimeout(r, 700 + Math.random() * 500));
+    typing.remove();
+
+    const query = text.toLowerCase();
+    const match = KB.find(e => e.kw.some(k => query.includes(k)));
+    const reply = match
+        ? match.ans
+        : `I don't have that info right now — for anything specific, reach out to Abdulrahman directly at abdulrahman2004an@gmail.com and he'll get back to you!`;
+
+    addMsg('ai', reply);
 }
 
 /* ══════════════════════════════════════════
