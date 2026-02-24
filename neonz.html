@@ -590,7 +590,7 @@
     }
     .stat-box::before {
         content: '';
-        position: absolute inset: 0;
+        position: absolute; inset: 0;
         background: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 60%);
         opacity: 0;
         transition: opacity 0.4s;
@@ -1258,17 +1258,12 @@
     .nz-avatar-img {
         max-height: 100%;
         object-fit: contain;
-        /* Removed saturate(0) to keep original colors */
         filter: drop-shadow(0 0 30px rgba(255,255,255,0.15)) brightness(1.05);
         animation: float 6s ease-in-out infinite;
         transition: filter 0.5s;
     }
     .nz-avatar-zone:hover .nz-avatar-img {
-        /* Increased drop-shadow and brightness on hover for the glow */
-        filter: drop-shadow(0 0 50px rgba(255,255,255,0.4)) brightness(1.15);
-    }
-    .nz-avatar-zone:hover .nz-avatar-img {
-        filter: drop-shadow(0 0 50px rgba(255,255,255,0.3)) saturate(0) brightness(1.15);
+        filter: drop-shadow(0 0 50px rgba(255,255,255,0.3)) brightness(1.15);
     }
     .nz-holo-ring {
         position: absolute; bottom: -10px;
@@ -1281,7 +1276,7 @@
         z-index: 1;
     }
 
-    /* Floating stat bubbles */
+    /* Floating stat bubbles (Keeping empty ones per user code or adjust numbers as requested) */
     .nz-bubble {
         position: absolute;
         background: rgba(255,255,255,0.04);
@@ -1293,7 +1288,7 @@
         z-index: 5;
         animation: float 5s ease-in-out infinite;
     }
-    .nz-bubble-1 { top: 15%; left: 0; animation-delay: 0s; }
+    .nz-bubble-1 { top: 15%; left: 0; animation-delay: 0s; display: none; /* Hidden by request to not show 6+ years */ }
     .nz-bubble-2 { bottom: 20%; right: 0; animation-delay: 1.5s; }
     .nz-bubble-num {
         font-family: var(--font-display);
@@ -1709,11 +1704,6 @@
                     <div class="stat-sub">APU — BSc AI Honours</div>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-number"><span class="count-up" data-target="6" data-decimals="0">0</span><span class="stat-suffix">+</span></span>
-                    <div class="stat-label">Years of Creation</div>
-                    <div class="stat-sub">Video production & content</div>
-                </div>
-                <div class="stat-box">
                     <span class="stat-number"><span class="count-up" data-target="3" data-decimals="0">0</span></span>
                     <div class="stat-label">Certifications</div>
                     <div class="stat-sub">AWS · Cisco · Red Hat</div>
@@ -1782,23 +1772,12 @@
                     <span class="skill-icon">🧠</span>
                     <div class="skill-card-title">AI & Data Systems</div>
                     <div class="skill-card-desc">Building intelligent pipelines from raw data to deployed models.</div>
-                    <div class="skill-bars" id="ai-bars">
-                        <div class="skill-bar-item">
-                            <div class="skill-bar-head"><span class="skill-bar-name">RAG Pipelines</span><span class="skill-bar-pct">90%</span></div>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
-                        </div>
-                        <div class="skill-bar-item">
-                            <div class="skill-bar-head"><span class="skill-bar-name">LLM Integration</span><span class="skill-bar-pct">85%</span></div>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-bar-item">
-                            <div class="skill-bar-head"><span class="skill-bar-name">Data Analysis</span><span class="skill-bar-pct">88%</span></div>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
-                        </div>
-                        <div class="skill-bar-item">
-                            <div class="skill-bar-head"><span class="skill-bar-name">Machine Learning</span><span class="skill-bar-pct">82%</span></div>
-                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
-                        </div>
+                    <div class="pill-grid">
+                        <span class="pill interactable">RAG Systems</span>
+                        <span class="pill interactable">LLMs</span>
+                        <span class="pill interactable">Prompt Engineering</span>
+                        <span class="pill interactable">Data Analysis</span>
+                        <span class="pill interactable">Machine Learning</span>
                     </div>
                 </div>
             </div>
@@ -1814,18 +1793,19 @@
                     <div class="timeline">
                         <div class="timeline-item reveal">
                             <div class="timeline-dot filled"></div>
-                            <div class="timeline-date">2024 — Present</div>
-                            <div class="timeline-role">Math Mentor</div>
-                            <div class="timeline-org">APU Math Clinic</div>
-                            <div class="timeline-desc">Providing 1-on-1 and group tutoring sessions, helping students build mathematical intuition for AI and data science coursework.</div>
-                            <div class="timeline-tag">Current Role</div>
+                            <div class="timeline-role">AI Intern</div>
+                            <div class="timeline-desc">Designed RAG systems using LLMs and integrated AI solutions into real products.</div>
+                            <div class="timeline-tag">Innovation Team</div>
                         </div>
                         <div class="timeline-item reveal reveal-delay-1">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-date">Previous</div>
+                            <div class="timeline-role">Math Mentor</div>
+                            <div class="timeline-desc">Provided 1-on-1 and group mentoring sessions, building mathematical intuition for AI coursework.</div>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-2">
+                            <div class="timeline-dot"></div>
                             <div class="timeline-role">Administrative Assistant</div>
-                            <div class="timeline-org">Success International School</div>
-                            <div class="timeline-desc">Managed operational workflows, communications, and data systems for a dynamic educational environment.</div>
+                            <div class="timeline-desc">Managed operational workflows, communications, and internal data systems.</div>
                         </div>
                     </div>
                 </div>
@@ -1834,11 +1814,9 @@
                     <div class="timeline">
                         <div class="timeline-item reveal">
                             <div class="timeline-dot filled"></div>
-                            <div class="timeline-date">2022 — Present</div>
-                            <div class="timeline-role">BSc (Hons) AI</div>
-                            <div class="timeline-org">Asia Pacific University (APU)</div>
-                            <div class="timeline-desc">Bachelor of Computer Science in Artificial Intelligence. Specializing in intelligent systems, data architecture, and machine learning. GPA: 3.65</div>
-                            <div class="timeline-tag">In Progress</div>
+                            <div class="timeline-role">BSc (Hons) Artificial Intelligence</div>
+                            <div class="timeline-desc">Specializing in intelligent systems, data architecture, and machine learning.</div>
+                            <div class="timeline-tag">Dual Award</div>
                         </div>
                     </div>
                 </div>
@@ -1946,10 +1924,6 @@
                 </div>
                 <div class="nz-holo-ring"></div>
                 <!-- floating stat bubbles -->
-                <div class="nz-bubble nz-bubble-1">
-                    <div class="nz-bubble-num">6+</div>
-                    <div class="nz-bubble-label">YRS</div>
-                </div>
                 <div class="nz-bubble nz-bubble-2">
                     <div class="nz-bubble-num">∞</div>
                     <div class="nz-bubble-label">VIEWS</div>
@@ -1967,7 +1941,7 @@
                     <span>YouTube · Gaming · Influence · Dev</span>
                 </div>
                 <p class="nz-desc">
-                    Directing, producing, and building loyal audiences across platforms. Six years of engineering content that gets watched, shared, and remembered.
+                    Directing, producing, and building loyal audiences across platforms. Engineering content that gets watched, shared, and remembered.
                 </p>
                 <div class="nz-cta-row">
                     <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-yt-btn interactable" style="padding:20px 44px;font-size:1rem;gap:14px;border-radius:14px;">
@@ -2481,7 +2455,7 @@ const KB = [
     { kw: ['edu','university','study','degree','apu','gpa','grade','uni'], ans: `He's studying BSc Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU), currently holding a GPA of 3.65.` },
     { kw: ['cert','aws','cisco','red hat','certif','qualification'], ans: `Abdulrahman holds three industry certifications: AWS Machine Learning Foundations, Cisco CCNA (Introduction to Networks), and Red Hat System Administration I.` },
     { kw: ['work','experience','job','mentor','admin','career','employ','role'], ans: `He currently works as a Math Mentor at the APU Math Clinic. Previously, he was an Administrative Assistant at Success International School, managing operations and data workflows.` },
-    { kw: ['creator','youtube','video','neonz','channel','content','xc'], ans: `He runs xc.neonz on YouTube — 6+ years of video production covering gaming, influencing, entertainment, and a developer series that bridges his tech and creative worlds.` },
+    { kw: ['creator','youtube','video','neonz','channel','content','xc'], ans: `He runs xc.neonz on YouTube — video production covering gaming, influencing, entertainment, and a developer series that bridges his tech and creative worlds.` },
     { kw: ['rag','pipeline','llm','ai','machine learning','intelligent','model'], ans: `His key technical focus is building RAG (Retrieval-Augmented Generation) pipelines and integrating LLMs into real applications — from data ingestion all the way through to the retrieval layer.` },
     { kw: ['project','build','built','made','portfolio'], ans: `His projects are showcased on this portfolio! They include work in Python, RAG pipelines, Java, and more. Scroll up to the Projects section for the full breakdown.` },
     { kw: ['contact','email','hire','reach','linkedin','collab','business','partner','ad','sponsor'], ans: `For professional enquiries, reach Abdulrahman at abdulrahman2004an@gmail.com or connect on LinkedIn. For business / creator partnerships, use xcn4ad@gmail.com.` },
