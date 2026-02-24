@@ -590,7 +590,7 @@
     }
     .stat-box::before {
         content: '';
-        position: absolute; inset: 0;
+        position: absolute inset: 0;
         background: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 60%);
         opacity: 0;
         transition: opacity 0.4s;
@@ -1258,9 +1258,14 @@
     .nz-avatar-img {
         max-height: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 0 30px rgba(255,255,255,0.15)) saturate(0) brightness(1.05);
+        /* Removed saturate(0) to keep original colors */
+        filter: drop-shadow(0 0 30px rgba(255,255,255,0.15)) brightness(1.05);
         animation: float 6s ease-in-out infinite;
         transition: filter 0.5s;
+    }
+    .nz-avatar-zone:hover .nz-avatar-img {
+        /* Increased drop-shadow and brightness on hover for the glow */
+        filter: drop-shadow(0 0 50px rgba(255,255,255,0.4)) brightness(1.15);
     }
     .nz-avatar-zone:hover .nz-avatar-img {
         filter: drop-shadow(0 0 50px rgba(255,255,255,0.3)) saturate(0) brightness(1.15);
@@ -1686,7 +1691,7 @@
             <div class="hero-right">
                 <div class="hero-deco-number">01</div>
                 <div class="scan-line"></div>
-                <img src="image_4ba5a9.png" alt="Abdulrahman" class="avatar-img">
+                <img src="assets/eng_avatar.png" alt="Abdulrahman" class="avatar-img">
                 <div class="holo-ring"></div>
             </div>
             <div class="scroll-indicator" style="position:absolute;">
@@ -1937,7 +1942,7 @@
                 <div class="nz-frame-corner nz-fc-br"></div>
                 <div class="nz-scan-wrap">
                     <div class="scan-line" style="background:#fff; box-shadow: 0 0 20px 6px rgba(255,255,255,0.25);"></div>
-                    <img src="image_4ba228.png" alt="Neonz" class="nz-avatar-img">
+                    <img src="assets/neonz_avatar.png" alt="Neonz" class="nz-avatar-img">
                 </div>
                 <div class="nz-holo-ring"></div>
                 <!-- floating stat bubbles -->
