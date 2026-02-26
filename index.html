@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAM | Abdulrahman — AI Engineer & Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader">
+    <div class="loader-tag">Initializing System v2.0</div>
+    <div class="loader-name" id="loader-name" data-text="AAM">AAM</div>
+    <div class="loader-progress-wrap">
+        <div class="loader-bar-bg"><div class="loader-bar-fill" id="loader-fill"></div></div>
+        <div class="loader-pct" id="loader-pct">0%</div>
+    </div>
+    <div class="loader-status" id="loader-status">Booting core modules...</div>
+</div>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<canvas id="aurora-canvas"></canvas>
+<canvas id="nz-canvas"></canvas>
+<div class="noise-overlay"></div>
+<div class="grid-overlay"></div>
+<div class="vhs-overlay"></div>
+<div class="nz-edge-glow"></div>
+
+<div id="switch-overlay">
+    <div class="so-glitch" id="so-text">REROUTING SIGNAL</div>
+    <div class="so-bar"><div class="so-bar-fill" id="so-fill"></div></div>
+    <div class="so-log" id="so-log"></div>
+</div>
+
+<nav id="main-nav">
+    <a class="nav-logo interactable" id="nav-brand">ABDULRAHMAN</a>
+
+    <div class="nav-links">
+        <a href="#skills" class="nav-link interactable">Skills</a>
+        <a href="#timeline" class="nav-link interactable">Timeline</a>
+        <a href="#projects" class="nav-link interactable">Projects</a>
+        <a href="mailto:abdulrahman2004an@gmail.com" class="nav-link interactable">Contact</a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+        <div class="mode-toggle interactable" onclick="switchMode()">
+            <div class="mode-pill"></div>
+            <div class="mode-btn active" id="mbtn-eng">AI.ENG</div>
+            <div class="mode-btn" id="mbtn-nz">NEONZ</div>
+        </div>
+        <a href="#" class="cv-btn interactable">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+        </a>
+    </div>
+</nav>
+
+<div class="page">
+
+    <div class="layer active" id="layer-eng">
+
+        <section class="hero" style="position:relative;">
+            <div class="hero-left">
+                <div class="hero-eyebrow interactable">AI Engineer & System Architect</div>
+                <h1 class="hero-title">
+                    <span class="line"><span>ABDULRAHMAN</span></span>
+                    <span class="line"><span class="outline-word">BUILDS</span> <span class="accent-word">THE</span></span>
+                    <span class="line"><span>FUTURE.</span></span>
+                </h1>
+                <p class="hero-desc">
+                    BSc in Artificial Intelligence at APU (GPA 3.65). I architect intelligent systems, engineer complex RAG pipelines, and build robust data infrastructure that actually ships.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn-main interactable">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+                        View Projects
+                    </a>
+                    <a href="https://github.com" target="_blank" class="btn-ghost interactable">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="btn-ghost interactable">LinkedIn</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-deco-number">01</div>
+                <div class="scan-line"></div>
+                <img src="assets/eng_avatar.png" alt="Abdulrahman" class="avatar-img">
+                <div class="holo-ring"></div>
+            </div>
+            <div class="scroll-indicator" style="position:absolute;">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <section class="section-wrap reveal" id="stats-section">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number"><span class="count-up" data-target="3.65" data-decimals="2">0</span></span>
+                    <div class="stat-label">Current GPA</div>
+                    <div class="stat-sub">APU — BSc AI Honours</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number"><span class="count-up" data-target="3" data-decimals="0">0</span></span>
+                    <div class="stat-label">Certifications</div>
+                    <div class="stat-sub">AWS · Cisco · Red Hat</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number"><span class="count-up" data-target="10" data-decimals="0">0</span><span class="stat-suffix">+</span></span>
+                    <div class="stat-label">Technologies</div>
+                    <div class="stat-sub">Languages & Frameworks</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrap reveal" id="skills">
+            <div class="section-label">Technical Stack</div>
+            <h2 class="section-title">Core <em>Infrastructure</em></h2>
+            <div class="skills-bento">
+                <div class="skill-card wide interactable reveal">
+                    <span class="skill-icon">💻</span>
+                    <div class="skill-card-title">Programming Core</div>
+                    <div class="skill-card-desc">Solid foundation across multiple paradigms — from data science scripting to OOP and systems administration.</div>
+                    <div class="pill-grid">
+                        <span class="pill interactable">Python</span>
+                        <span class="pill interactable">Java</span>
+                        <span class="pill interactable">C#</span>
+                        <span class="pill interactable">R</span>
+                        <span class="pill interactable">PostgreSQL</span>
+                        <span class="pill interactable">SQL</span>
+                        <span class="pill interactable">Bash / Shell</span>
+                    </div>
+                </div>
+
+                <div class="skill-card tall interactable reveal reveal-delay-1">
+                    <span class="skill-icon">📜</span>
+                    <div class="skill-card-title">Certifications</div>
+                    <div class="skill-card-desc">Verified industry credentials backing the engineering expertise.</div>
+                    <div class="cert-list">
+                        <div class="cert-item">
+                            <div class="cert-icon">☁️</div>
+                            <div>
+                                <div class="cert-name">AWS ML Foundations</div>
+                                <div class="cert-body">Amazon Web Services</div>
+                            </div>
+                        </div>
+                        <div class="cert-item">
+                            <div class="cert-icon">🌐</div>
+                            <div>
+                                <div class="cert-name">Cisco CCNA</div>
+                                <div class="cert-body">Introduction to Networks</div>
+                            </div>
+                        </div>
+                        <div class="cert-item">
+                            <div class="cert-icon">🎩</div>
+                            <div>
+                                <div class="cert-name">Red Hat RHCSA</div>
+                                <div class="cert-body">System Administration I</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card interactable reveal reveal-delay-2">
+                    <span class="skill-icon">🧠</span>
+                    <div class="skill-card-title">AI & Data Systems</div>
+                    <div class="skill-card-desc">Building intelligent pipelines from raw data to deployed models.</div>
+                    <div class="pill-grid">
+                        <span class="pill interactable">RAG Systems</span>
+                        <span class="pill interactable">LLMs</span>
+                        <span class="pill interactable">Prompt Engineering</span>
+                        <span class="pill interactable">Data Analysis</span>
+                        <span class="pill interactable">Machine Learning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrap" id="timeline">
+            <div class="section-label">Background</div>
+            <h2 class="section-title">Experience & <em>Education</em></h2>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+                <div>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 36px; text-transform: uppercase;">Work</h3>
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <div class="timeline-dot filled"></div>
+                            <div class="timeline-role">AI Intern</div>
+                            <div class="timeline-desc">Designed RAG systems using LLMs and integrated AI solutions into real products.</div>
+                            <div class="timeline-tag">Innovation Team</div>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-1">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-role">Math Mentor</div>
+                            <div class="timeline-desc">Provided 1-on-1 and group mentoring sessions, building mathematical intuition for AI coursework.</div>
+                        </div>
+                        <div class="timeline-item reveal reveal-delay-2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-role">Administrative Assistant</div>
+                            <div class="timeline-desc">Managed operational workflows, communications, and internal data systems.</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 36px; text-transform: uppercase;">Education</h3>
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <div class="timeline-dot filled"></div>
+                            <div class="timeline-role">BSc (Hons) Artificial Intelligence</div>
+                            <div class="timeline-desc">Specializing in intelligent systems, data architecture, and machine learning.</div>
+                            <div class="timeline-tag">Dual Award</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrap" id="projects">
+            <div class="section-label">Engineering Work</div>
+            <h2 class="section-title">Featured <em>Projects</em></h2>
+
+            <div class="projects-grid">
+
+                <div class="project-card featured interactable reveal">
+                    <div style="flex:1">
+                        <div class="featured-badge">★ Featured Project</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">RAG</span>
+                            <span class="project-tag">LLM</span>
+                            <span class="project-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-title">[Project Title 1]</div>
+                        <div class="project-desc">Your key project description goes here — what problem does it solve? What makes it intelligent? Describe the architecture: data ingestion, vector embeddings, retrieval pipeline, and the model powering it. This is your flagship engineering achievement.</div>
+                        <a href="#" class="project-link interactable">
+                            View Repository
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                        </a>
+                    </div>
+                    <div style="flex:0.5; display:flex; align-items:center; justify-content:center; min-height:200px;">
+                        <div style="width:180px; height:180px; border:1px solid var(--border); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:4rem; background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);">🌐</div>
+                    </div>
+                </div>
+
+                <div class="project-card interactable reveal reveal-delay-1">
+                    <div class="project-num">02</div>
+                    <div class="project-tags">
+                        <span class="project-tag">Java</span>
+                        <span class="project-tag">SQL</span>
+                    </div>
+                    <div class="project-title">[Project Title 2]</div>
+                    <div class="project-desc">Describe the technical challenge this project addresses. Include the data structures, algorithms, or architecture decisions that make it stand out. Replace with real details!</div>
+                    <a href="#" class="project-link interactable">
+                        View Repository
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="layer" id="layer-neonz">
+
+        <div class="nz-broadcast-bar">
+            <div class="nz-onair">
+                <span class="nz-onair-dot"></span>
+                ON AIR
+            </div>
+            <div class="nz-ticker-wrap">
+                <div class="nz-ticker">
+                    <span>xc.neonz</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Gaming</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Influencing</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Entertainment</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Dev Series</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Digital Creator</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>xc.neonz</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Gaming</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Influencing</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Entertainment</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Dev Series</span>
+                    <span class="nz-ticker-sep">◆</span>
+                    <span>Digital Creator</span>
+                    <span class="nz-ticker-sep">◆</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="nz-hero">
+            <div class="nz-avatar-zone">
+                <div class="nz-frame-corner nz-fc-tl"></div>
+                <div class="nz-frame-corner nz-fc-tr"></div>
+                <div class="nz-frame-corner nz-fc-bl"></div>
+                <div class="nz-frame-corner nz-fc-br"></div>
+                <div class="nz-scan-wrap">
+                    <div class="scan-line" style="background:#fff; box-shadow: 0 0 20px 6px rgba(255,255,255,0.25);"></div>
+                    <img src="assets/neonz_avatar.png" alt="Neonz" class="nz-avatar-img">
+                </div>
+                <div class="nz-holo-ring"></div>
+                <div class="nz-bubble nz-bubble-2">
+                    <div class="nz-bubble-num">∞</div>
+                    <div class="nz-bubble-label">VIEWS</div>
+                </div>
+            </div>
+
+            <div class="nz-hero-text">
+                <div class="nz-kicker">Digital Content Creator</div>
+                <h1 class="nz-giant-title">
+                    <span class="nz-title-line nz-outline scramble-el" data-val="NEONZ">NEONZ</span>
+                </h1>
+                <div class="nz-subline">
+                    <span class="nz-subline-mark">—</span>
+                    <span>YouTube · Gaming · Influence · Dev</span>
+                </div>
+                <p class="nz-desc">
+                    Directing, producing, and building loyal audiences across platforms. Engineering content that gets watched, shared, and remembered.
+                </p>
+                <div class="nz-cta-row">
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-yt-btn interactable" style="padding:20px 44px;font-size:1rem;gap:14px;border-radius:14px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.75 12.64 12.64 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69 50 50 0 0 0 4 12a50 50 0 0 0 .41 5.31 4.83 4.83 0 0 1 3.77 2.75 12.64 12.64 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.75A50 50 0 0 0 20 12a50 50 0 0 0-.41-5.31zM9.75 15.02V8.98L15.5 12z"/></svg>
+                        Watch Now
+                    </a>
+                    <a href="mailto:xcn4ad@gmail.com" class="nz-email-btn interactable">
+                        Collab / Ads →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="nz-pillars-section reveal">
+            <div class="nz-section-label">// Content Directives</div>
+            <div class="nz-pillars-grid">
+                <div class="nz-pillar nz-pillar-gaming interactable">
+                    <div class="nz-pillar-bg-text">01</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🎮</div>
+                        <div class="nz-pillar-name">Gaming</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">High-energy gameplay, walkthroughs, and community entertainment built for the players.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-influence interactable">
+                    <div class="nz-pillar-bg-text">02</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🌟</div>
+                        <div class="nz-pillar-name">Influence</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">Personality-led storytelling, lifestyle, and digital culture. Authentic. Viral-ready.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-entertain interactable">
+                    <div class="nz-pillar-bg-text">03</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">🎬</div>
+                        <div class="nz-pillar-name">Entertainment</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">Creative concepts, dynamic challenges, and video formats engineered to earn the watch.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+                <div class="nz-pillar nz-pillar-dev interactable">
+                    <div class="nz-pillar-bg-text">04</div>
+                    <div class="nz-pillar-inner">
+                        <div class="nz-pillar-icon">⚙️</div>
+                        <div class="nz-pillar-name">Dev Series</div>
+                        <div class="nz-pillar-dash"></div>
+                        <div class="nz-pillar-body">The builder mindset on camera. Coding, AI experiments, and technical storytelling.</div>
+                        <div class="nz-pillar-arrow">↗</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nz-collab reveal">
+            <div class="nz-collab-noise"></div>
+            <div class="nz-collab-inner">
+                <div class="nz-collab-tag">// Open for Business</div>
+                <h2 class="nz-collab-title">
+                    Let's Build<br>
+                    <span class="nz-collab-outline">Something.</span>
+                </h2>
+                <p class="nz-collab-desc">Brand deals, sponsored content, creative collabs — if it connects with an audience, let's talk.</p>
+                <div class="nz-collab-ctas">
+                    <a href="mailto:xcn4ad@gmail.com" class="nz-yt-btn interactable" style="font-size:0.9rem; padding:18px 38px;">
+                        xcn4ad@gmail.com
+                    </a>
+                    <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="nz-email-btn interactable">
+                        View Channel ↗
+                    </a>
+                </div>
+            </div>
+            <div class="nz-collab-deco">NEONZ</div>
+        </section>
+
+    </div>
+
+</div>
+
+<div id="chat-widget">
+    <button id="chat-toggle" onclick="toggleChat()" class="interactable" title="Ask AAM-Core">
+        <div id="chat-toggle-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div id="chat-toggle-close" style="display:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <div class="chat-pulse-ring"></div>
+    </button>
+
+    <div id="chat-panel" class="chat-panel-hidden">
+        <div class="chat-topbar">
+            <div class="chat-avatar">AI</div>
+            <div style="flex:1">
+                <div class="chat-name" id="chat-widget-name">AAM Assistant</div>
+                <div class="chat-subtitle"><span class="chat-status"><span class="status-dot"></span> Online</span></div>
+            </div>
+            <button onclick="toggleChat()" style="background:none;border:none;color:var(--text-muted);padding:4px;" class="interactable">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages" style="min-height:260px; max-height:300px;">
+            <div class="chat-msg msg-ai">Hey! Ask me anything about Abdulrahman — skills, education, projects, experience.</div>
+        </div>
+        <div class="suggested-qs" id="suggested-qs">
+            <button class="sq interactable" onclick="askSuggested(this)">Skills?</button>
+            <button class="sq interactable" onclick="askSuggested(this)">Education?</button>
+            <button class="sq interactable" onclick="askSuggested(this)">Experience?</button>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-inp" class="chat-input interactable" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendMsg()">
+            <button class="chat-send interactable" onclick="sendMsg()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-brand">AAM<span>_</span>CORE</div>
+    <div class="footer-links">
+        <a href="https://linkedin.com" target="_blank" class="footer-link interactable">LinkedIn</a>
+        <a href="https://github.com" target="_blank" class="footer-link interactable">GitHub</a>
+        <a href="https://www.youtube.com/@neonz_xc" target="_blank" class="footer-link interactable">YouTube</a>
+        <a href="mailto:abdulrahman2004an@gmail.com" class="footer-link interactable">Email</a>
+    </div>
+    <div class="footer-copy">
+        © 2025 Abdulrahman<br>
+        <span style="color:var(--text-dim);">Engineered from scratch.</span>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
