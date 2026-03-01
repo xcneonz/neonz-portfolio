@@ -310,7 +310,7 @@ function switchMode() {
 
 const KB = [
     { kw: ['skill','tech','language','program','stack','code','python','java','c#','r ','sql'], ans: `Abdulrahman's core languages are Python, Java, C#, R, PostgreSQL, and SQL. On the AI side, he specialises in RAG Pipelines, LLM integration, Data Analysis, and Machine Learning.` },
-    { kw: ['edu','university','study','degree','apu','gpa','grade','uni'], ans: `He's studying BSc Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU), currently holding a GPA of 3.65.` },
+    { kw: ['edu','university','study','degree','apu','gpa','grade','uni'], ans: `He's studying BSc Computer Science (Hons) in Artificial Intelligence at Asia Pacific University (APU).` },
     { kw: ['cert','aws','cisco','red hat','certif','qualification'], ans: `Abdulrahman holds three industry certifications: AWS Machine Learning Foundations, Cisco CCNA (Introduction to Networks), and Red Hat System Administration I.` },
     { kw: ['work','experience','job','mentor','admin','career','employ','role'], ans: `He currently works as a Math Mentor at the APU Math Clinic. Previously, he was an Administrative Assistant at Success International School, managing operations and data workflows.` },
     { kw: ['creator','youtube','video','neonz','channel','content','xc'], ans: `He runs xc.neonz on YouTube — video production covering gaming, influencing, entertainment, and a developer series that bridges his tech and creative worlds.` },
